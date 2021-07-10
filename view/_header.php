@@ -2,18 +2,22 @@
 <html>
 <head>
 	<meta charset="utf8">
-	<title>ebuy</title>
-	<link rel="stylesheet" href="<?php echo __SITE_URL;?>/css/style.css">
+	<title>Igre</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="view/brodovi.js"></script>
+	<script src="view/memory.js"></script>
+	<script src="view/opcenito.js"></script>
+	<link rel="stylesheet" href="<?php echo __SITE_URL;?>/css/igre.css">
+	<!--<link rel="stylesheet" href="<?php //echo __SITE_URL;?>/css/style.css">-->
 </head>
 <body>
-	<h1><?php echo $title; ?></h1>
+	<h1 id="main_title">Igre</h1>
 
 	<nav>
 		<ul>
-			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=products">Popis svih proizvoda koje prodaješ</a></li>
-			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=add">Dodaj novi proizvod za prodaju</a></li>
-			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=products/bought">Popis proizvoda koje si kupio</a></li>
-			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=search">Traži proizvode</a></li>
+			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=products">Profil</a></li>
+			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=add">Igre</a></li>
+			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=search">Traži igrače</a></li>
 			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=logout">Logout</a></li>
 		</ul>
 	</nav>

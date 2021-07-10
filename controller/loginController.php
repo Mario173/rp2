@@ -5,10 +5,10 @@ class LoginController extends BaseController
 	public function index() 
 	{
 		// Kontroler koji prikazuje popis svih usera
-		$ls = new StoreService();
+		//$ls = new StoreService();
 
         if(isset($_SESSION['user_id'])){
-            header( 'Location: ' . __SITE_URL . '/index.php?rt=products' );
+            header( 'Location: ' . __SITE_URL . '/index.php?rt=igre' );
             exit();
         }
 
@@ -19,10 +19,11 @@ class LoginController extends BaseController
 
     public function processLogin()
     {
-        $ls = new StoreService();
+        //$ls = new StoreService();
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $user = $ls->getUserByUsername( $username );
+        header( 'Location: ' . __SITE_URL . '/index.php?rt=igre' );
+        /*$user = $ls->getUserByUsername( $username );
         if($user === null ){
             header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
             exit();
@@ -37,6 +38,6 @@ class LoginController extends BaseController
         else{
             header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
             exit();
-        }
+        }*/
     }
 }

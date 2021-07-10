@@ -1,0 +1,144 @@
+td.field {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+}
+td.nums {
+    text-align: center;
+}
+#game_id {
+    visibility: hidden;
+}
+
+#sea {
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    display: inline-block;
+}
+
+div.ship {
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    background-color: black;
+    display: inline-block;
+}
+div.one, div.two, div.three, div.four {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+#left, #middle, #right, #place_for_table, #ships_and_buttons  {
+    display: inline-block;
+}
+
+#ships_and_buttons {
+    vertical-align: top;
+    margin-left: 20px;
+}
+
+#name_of_the_game {
+    text-align: center;
+}
+
+#middle {
+    width: 40%;
+    height: 100%;
+}
+
+#left, #right {
+    width: 20%;
+    height: 100vh;
+    vertical-align: top;
+}
+
+body {
+    margin: 0;
+}
+
+#left {
+    background-color: midnightblue;
+    color: white;
+    margin: 0;
+}
+
+#avatar {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#username {
+    text-align: middle;
+    display: inline-block;
+}
+
+h2 {
+    margin: 0;
+}
+
+.naslovi {
+    margin: 0;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user, #right {
+    text-align: center;
+}
+
+.cell_high {
+    border: 1px solid black;
+    text-align: center;
+}
+
+#tablica_highscore {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#main_title {
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    background-color: #1A1A2E;
+    color: #E94560;
+}
+
+nav, nav > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+nav > ul > li {
+    float: left;
+    width: 25%;
+    height: 7vh;
+    background-color: #1A1A2E;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    color: #E94560;
+    display: block;
+    text-align: center;
+    padding: 15px;
+    font: 25px bolder;
+}
+
+.field_memory {
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: white;
+}
+
