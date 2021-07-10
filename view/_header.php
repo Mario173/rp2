@@ -8,7 +8,7 @@
 	<script src="view/memory.js"></script>
 	<script src="view/opcenito.js"></script>
 	<link rel="stylesheet" href="<?php echo __SITE_URL;?>/css/igre.css">
-	<!--<link rel="stylesheet" href="<?php //echo __SITE_URL;?>/css/style.css">-->
+	<script src="https://kit.fontawesome.com/dbccd0c414.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<h1 id="main_title">Igre</h1>

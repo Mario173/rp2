@@ -106,6 +106,7 @@ h2 {
     text-align: center;
     margin: 0;
     width: 100%;
+    height: 7vh;
     background-color: #1A1A2E;
     color: #E94560;
 }
@@ -136,8 +137,8 @@ nav > ul > li > a {
 
 .field_memory {
     border: 1px solid black;
-    width: 40px;
-    height: 40px;
+    width: 5vh;
+    height: 5vh;
     text-align: center;
     color: white;
 }
