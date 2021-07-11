@@ -19,7 +19,7 @@ function pokreni_memory() {
     $.ajax({
         async: false,
         type: "POST",
-        url: "index.php/ajaxControllerHelp.php", // ovde je problem, ne znan kako nać ajaxControllerHelp.php
+        url: "controller/ajaxControllerHelp.php", // ovde je problem, ne znan kako nać ajaxControllerHelp.php
         dataType: "json",
         data: {
             game: 'memory'
