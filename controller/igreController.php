@@ -27,10 +27,20 @@ class IgreController extends BaseController
 
 		$this->sendJSONandExit( $data );
 	}
-
+	// vraća id, te 2 arraya -> rows i cols
 	public function generiraj_potapanje() {
 		$data = [];
+	}
 
+	public function provjeri_potapanje() {
+
+	}
+
+	public function generiraj_vjesala() {
+
+	}
+
+	public function generiraj_krizic_kruzic() {
 		
 	}
 }; 

@@ -1,6 +1,6 @@
 var puta_kliknuto = 1, prošli = [], točne_kućice = 0;
-var table = [ ['A', 'B', 'C', 'D', 'E', 'F'], ['G', 'H', 'I', 'J', 'K', 'L'], ['M', 'N', 'O', 'P', 'Q', 'R'],
-                ['R', 'Q', 'P', 'O', 'N', 'M'], ['L', 'K', 'J', 'I', 'H', 'G'], ['F', 'E', 'D', 'C', 'B', 'A'] ];
+var table = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+                'R', 'Q', 'P', 'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A' ];
 
 var which_icon = [];
 
@@ -15,11 +15,11 @@ function pokreni_memory() {
     $("#name_of_the_game").html('Memory');
     $("#won").html('');
 
-    postavi_ikone();
+    postavi_ikone();/*
     $.ajax({
         async: false,
         type: "POST",
-        url: "index.php/ajaxControllerHelp.php", // ovde je problem, ne znan kako nać ajaxControllerHelp.php
+        url: "controller/ajaxControllerHelp.php", // ovde je problem, ne znan kako nać ajaxControllerHelp.php
         dataType: "json",
         data: {
             game: 'memory'
@@ -35,7 +35,9 @@ function pokreni_memory() {
                 console.log('Ajax greška: ' + status);
             }
         }
-    });
+    });*/
+
+    nacrtaj_tablicu( table ); // ovo maknite ako radi ajax
 
     $(".field_memory").on("click", klikNaPloču);
 
@@ -44,12 +46,14 @@ function pokreni_memory() {
 
 function nacrtaj_tablicu( table ) {
     var contents = '<table>';
-    for(var i = 0; i < table.length; i++) {
-        contents += '<tr>';
-        for(var j = 0; j < table[i].length; j++) {
-            contents += ('<td class="field_memory" id="' + i + j + '">' + which_icon[table[i][j]] + '</td>');
+    for(var i = 0; i < table.length; i++) { // id ide od 0 do 35
+        if(i % 6 === 0) {
+            contents += '<tr>';
         }
-        contents += '</tr>';
+        contents += ('<td class="field_memory" id="' + i + '">' + which_icon[table[i]] + '</td>');
+        if(i % 6 === 5) {
+            contents += '</tr>';
+        }
     }
     contents += '</table>';
 
@@ -57,17 +61,16 @@ function nacrtaj_tablicu( table ) {
 }
 
 async function klikNaPloču() {
-    var tekst = $(this).attr('id');
-    var x = parseInt(tekst.charAt(0)), y = parseInt(tekst.charAt(1));
+    var x = parseInt($(this).attr('id'));
 
     if( puta_kliknuto === 1 ) {
-        prošli = [x, y, $(this).html()]; // kad budu slikice, treci char u id ce bit jedan od A, B, C, D, E, F
+        prošli = [x, $(this).html()]; // kad budu slikice, treci char u id ce bit jedan od A, B, C, D, E, F
         $(this).css("color", "black");
         puta_kliknuto++;
     } else {
         $(this).css("color", "black");
         puta_kliknuto = 1;
-        if( prošli[2] === $(this).html() ) {
+        if( prošli[1] === $(this).html() ) {
             točne_kućice++;
             if( točne_kućice === 18 ) {
                 $("#won").html('Čestitam, pobjeda!!!');
@@ -77,7 +80,7 @@ async function klikNaPloču() {
             broj_grešaka++;
             await new Promise(r => setTimeout(r, 500)); // bolje da je ovde
             $(this).css("color", "white");
-            $("#" + prošli[0] + prošli[1]).css("color", "white");
+            $("#" + prošli[0]).css("color", "white");
         }
     }
 }

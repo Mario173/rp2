@@ -2,6 +2,8 @@ var igre = ['Potapanje_brodova', 'Memory', 'Vješala', 'Križić-kružić'];
 var highscore = [];
 highscore['Potapanje_brodova'] = ['User1', 147, 'User2', 144, 'User3', 133]; // inače ćemo povlačit iz baze
 highscore['Memory'] = ['User2', 104, 'User6', 99, 'User1', 80];
+highscore['Vješala'] = ['User1', 100, 'User6', 92, 'User1', 81];
+highscore['Križić-kružić'] = ['User2', 112, 'User2', 105, 'User1', 80];
 
 var avatari = ['view/avatar.webp', 'view/avatar2.jpg', 'view/icon.png'], curr_avatar = 0, num_of_avatars = 3; // za avatare
 
@@ -70,6 +72,16 @@ function iscrtaj_lijevo() {
     $("#Memory").on("click", function() {
         pokreni_memory();
         iscrtaj_highscore('Memory');
+    });
+
+    $("#Vješala").on("#click", function() {
+        pokreni_vješala();
+        iscrtaj_highscore('Vješala');
+    });
+
+    $("#Križić-kružić").on("click", function() {
+        pokreni_križić_kružić();
+        iscrtaj_highscore('Križić-kružić');
     });
 }
 

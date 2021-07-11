@@ -9,7 +9,7 @@ function pokreni_brodove() {
     $("#won").html('');
     
     create_ships();
-
+    
     $.ajax({
         async: false,
         type: "GET",

@@ -6,6 +6,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<script src="view/brodovi.js"></script>
 	<script src="view/memory.js"></script>
+	<script src="view/krizic_kruzic.js"></script>
 	<script src="view/opcenito.js"></script>
 	<link rel="stylesheet" href="<?php echo __SITE_URL;?>/css/igre.css">
 	<script src="https://kit.fontawesome.com/dbccd0c414.js" crossorigin="anonymous"></script>
