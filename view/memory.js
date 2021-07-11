@@ -4,6 +4,8 @@ var table = [ ['A', 'B', 'C', 'D', 'E', 'F'], ['G', 'H', 'I', 'J', 'K', 'L'], ['
 
 var which_icon = [];
 
+var broj_grešaka = 0;
+
 function pokreni_memory() {
     točne_kućice = 0;
 
@@ -14,24 +16,26 @@ function pokreni_memory() {
     $("#won").html('');
 
     postavi_ikone();
-    /* ode ce inace ic ajax kad implementiramo to -> cita san da triba u controller, al nisu bas ljudi suglasno skroz oko toga
     $.ajax({
         async: false,
-        type: "GET",
-        url: "https://rp2.studenti.math.hr/~zbujanov/dz4/id.php",
+        type: "POST",
+        url: "index.php/ajaxControllerHelp.php", // ovde je problem, ne znan kako nać ajaxControllerHelp.php
         dataType: "json",
+        data: {
+            game: 'memory'
+        },
         success: function( data ) {
+            console.log( data );
             $("#game_id").html(data['id']);
             nacrtaj_tablicu( data['table'] );
         },
-        error: function( xhr, status ) {
+        error: function( xhr, status, data ) {
+            console.log(JSON.stringify(data));
             if( status != null ) {
                 console.log('Ajax greška: ' + status);
             }
         }
-    });*/
-
-    nacrtaj_tablicu( table );
+    });
 
     $(".field_memory").on("click", klikNaPloču);
 
@@ -70,6 +74,7 @@ async function klikNaPloču() {
                 // računanje bodova i to
             }
         } else {
+            broj_grešaka++;
             await new Promise(r => setTimeout(r, 500)); // bolje da je ovde
             $(this).css("color", "white");
             $("#" + prošli[0] + prošli[1]).css("color", "white");
@@ -78,6 +83,7 @@ async function klikNaPloču() {
 }
 
 function ponovi() {
+    broj_grešaka = 0;
     $("#won").html('');
 
     pokreni_memory();
