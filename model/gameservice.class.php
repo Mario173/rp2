@@ -235,6 +235,16 @@ class GameService {
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
 
+	function addHighScore($id_game, $id_user, $high_score){
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'INSERT INTO project_high_scores(id_game, id_user, date_achieved) VALUES(:id_game, :id_user, :high_score,CURRENT_DATE());');
+			$st->execute( array( 'id_user' => $id_user, 'id_game' => $id_game, 'high_score' => $high_score) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
+
 	function addNewProduct($id_user, $name, $description, $price){
 		try
 		{
