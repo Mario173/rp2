@@ -49,20 +49,20 @@ function klikNaPloči() {
     var koji_sirina = Math.floor((3 * x) / canvas.width);
     var koji_visina = Math.floor((3 * y) / canvas.height);
 
-    if( won === 0 ) {
-        nacrtaj_simbol(koji_sirina, koji_visina, choice);
-        provjeri_pobjedu();
+    if( positions_left.indexOf(3 * koji_sirina + koji_visina) !== -1 ) {
+        if( won === 0 ) {
+            nacrtaj_simbol(koji_sirina, koji_visina, choice);
+            provjeri_pobjedu();
+        }
+
+        if( won === 0 && positions_left.length !== 0 ) {
+            // random generiraj idući potez
+            var randomElement = positions_left[Math.floor(Math.random() * positions_left.length)];
+
+            nacrtaj_simbol(Math.floor(randomElement / 3), randomElement % 3, 1 - choice);
+            provjeri_pobjedu();
+        }
     }
-
-    if( won === 0 && positions_left.length !== 0 ) {
-        // random generiraj idući potez
-        var randomElement = positions_left[Math.floor(Math.random() * positions_left.length)];
-
-        nacrtaj_simbol(Math.floor(randomElement / 3), randomElement % 3, 1 - choice);
-        provjeri_pobjedu();
-    }
-
-    console.log(positions_left, positions_left.length, won);
 
     if( positions_left.length === 0 && won === 0 ) {
         $("#won").html('Izjednačeno');

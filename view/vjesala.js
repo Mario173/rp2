@@ -11,10 +11,11 @@ function pokreni_vješala()
     // daj korisniku da izabere težinu igre
     $("#middle").html('<h1 id="name_of_the_game" ></h1>'
                         +'<canvas id="cnv" disabled></canvas>' + '<br>'
-                        +'<div id="slova_za_birati" display="inline-block"></div>'
-                        +'<input type="text", id="pokusaj">'
-                        +'<button id="provjeri">Provjeri!</button>"'
-                        +'<button id="again">Hoću sve ispočetka!</button>'
+                        +'<div id="slova_za_birati"></div><div id="text_gumbi">'
+                        + 'Pokušajte pogoditi točnu riječ: <br />'
+                        +'<input type="text", id="pokusaj"><br />'
+                        +'<button id="provjeri">Provjeri!</button>'
+                        +'<button id="again">Hoću sve ispočetka!</button></div>'
                         +'<div id="won"></div>'
                         +'<input type="radio id="težina" name="težina>');
 
