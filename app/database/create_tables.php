@@ -52,7 +52,7 @@ function create_table_users()
 			'email varchar(50) NOT NULL,' .
 			'registration_sequence varchar(20) NOT NULL,' .
 			'has_registered int,' .
-			'privacy int,' .
+			'avatar_id int,' .
 			'experience int NOT NULL,' .
 			'level int NOT NULL' .
 			')'

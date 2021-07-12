@@ -7,7 +7,7 @@ class GameService {
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare( 'SELECT id, username, password_hash, email, registration_sequence, has_registered, experience, level
+			$st = $db->prepare( 'SELECT id, username, password_hash, email, registration_sequence, has_registered, avatar_id, experience, level
                 FROM project_users WHERE id=:id' );
 			$st->execute( array( 'id' => $id ) );
 		}
@@ -18,7 +18,26 @@ class GameService {
 			return null;
 		else
 			return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'],
-             $row['registration_sequence'], $row['has_registered'], $row['privacy'], $row['experience'],$row['level']);
+             $row['registration_sequence'], $row['has_registered'], $row['avatar_id'], $row['experience'],$row['level']);
+	}
+
+	function getUserByUsername( $username )
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT id, username, password_hash, email, registration_sequence, has_registered, avatar_id, experience, level
+                FROM project_users WHERE username=:username' );
+			$st->execute( array( 'username' => $username ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$row = $st->fetch();
+		if( $row === false )
+			return null;
+		else
+			return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'],
+             $row['registration_sequence'], $row['has_registered'], $row['avatar_id'], $row['experience'],$row['level']);
 	}
 
     function getGameById( $id )
@@ -58,7 +77,7 @@ class GameService {
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare( 'SELECT id, id_game, id_user,rating, comment FROM project_reviews WHERE id_user=:id_user, id_game=:id_game' );
+			$st = $db->prepare( 'SELECT id, id_game, id_user,rating, comment FROM project_reviews WHERE id_user=:id_user AND id_game=:id_game' );
 			$st->execute( array( 'id_user' => $id_user, 'id_game' => $id_game ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -135,7 +154,7 @@ class GameService {
         try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare( 'SELECT id, id_game, id_user,high_score, date_achieved FROM project_high_scores WHERE id_user=:id_user, id_game=:id_game' );
+			$st = $db->prepare( 'SELECT id, id_game, id_user,high_score, date_achieved FROM project_high_scores WHERE id_user=:id_user AND id_game=:id_game' );
 			$st->execute( array( 'id_user' => $id_user, 'id_game' => $id_game ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -181,18 +200,18 @@ class GameService {
 		while( $row = $st->fetch() )
 		{
 			$arr[] = new User( $row['id'], $row['username'], $row['password_hash'], $row['email'],
-                $row['registration_sequence'], $row['has_registered'], $row['privacy'], $row['experience'],$row['level']);
+                $row['registration_sequence'], $row['has_registered'], $row['avatar_id'], $row['experience'],$row['level']);
 		}
 
 		return $arr;
 	}
 
-	function checkIfHighScoreExists($id_game,$id_user){
+	function checkIfHighScoreExists($id_game, $id_user){
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare( 'SELECT id, id_game, id_user,high_score, date_achieved FROM project_high_scores WHERE id_user=:id_user, id_game=:id_game' );
-			$st->execute( array( 'id_user' => $id_user, 'id_game' => $id_game ) );
+			$st = $db->prepare( 'SELECT id, id_game, id_user,high_score, date_achieved FROM project_high_scores WHERE id_user = :id_user AND id_game = :id_game ;');
+			$st->execute( array( 'id_user' => (int) $id_user, 'id_game' => (int)$id_game ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
@@ -225,6 +244,26 @@ class GameService {
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
+
+	function getAllGameIds(){
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT id FROM
+                project_games');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] =(int) $row['id'];
+		}
+
+		return $arr;
+	}
+
 
 
 

@@ -5,7 +5,7 @@
 <div id="top">
     <div id="user">
         <img alt="Avatar" id="avatar" src="view/avatar.webp">
-        <h1 id="username">Username</h1>
+        <h1 id="username"><?php echo $username ?></h1>
     </div>
     <div id="games"></div>
 </div>
@@ -13,10 +13,11 @@
     <h3>My highscores: </h3>
     <ul id="highscores">
         <!-- inače priko neke skripte povuci -->
-        <li><b>Potapanje brodova:</b> 130</li>
-        <li><b>Memory:</b> 104</li>
-        <li><b>Vješala:</b> 135</li>
-        <li><b>Križić-kružić:</b> 50</li>
+        <?php 
+            foreach($high_scores as $high){
+                echo "<li><b>" . $high['name'] . "</b>" . " " . $high['high_score']  . " " . $high['date_achieved'] . "</li>";
+            }
+        ?>
     </ul>
     <h3>My achievements: </h3>
     <ul id="achievements">
