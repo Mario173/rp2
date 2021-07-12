@@ -135,6 +135,18 @@ nav > ul > li > a {
     font: 25px bolder;
 }
 
+body div#bottom-left {
+    width: 35%;
+    margin-left: 25%;
+    display: inline-block;
+}
+
+body div#bottom-right {
+    width: 35%;
+    display: inline-block;
+    vertical-align: top;
+}
+
 .field_memory {
     border: 1px solid black;
     width: 5vh;

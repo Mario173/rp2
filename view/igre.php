@@ -13,7 +13,7 @@
     <!-- ovde će ić svi -->
 </div>
 <div id="right">
-    <h2 style="height: 50px;">Highscore</h2>
+    <h2>Highscore</h2>
     <table id="tablica_highscore"></table>
 </div>
 

@@ -16,8 +16,8 @@
 
 	<nav>
 		<ul>
-			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=products">Profil</a></li>
-			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=add">Igre</a></li>
+			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=profile">Profil</a></li>
+			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=igre">Igre</a></li>
 			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=search">Traži igrače</a></li>
 			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=logout">Logout</a></li>
 		</ul>
