@@ -158,8 +158,20 @@ body div#bottom-right {
 #cnv {
     border: 1px solid black;
 }
+
 #slova_za_birati{
     width: 200px;
-    height: 500px;
+    height: 300px;
     border: 1px solid black;
+    display: inline-block;
+}
+
+#text_gumbi {
+    display: inline-block;
+    margin-left: 2.5%;
+    vertical-align: top;
+}
+
+#pokusaj, #provjeri {
+    margin: 5px;
 }
