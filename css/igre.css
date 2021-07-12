@@ -158,4 +158,8 @@ body div#bottom-right {
 #cnv {
     border: 1px solid black;
 }
-
+#slova_za_birati{
+    width: 200px;
+    height: 500px;
+    border: 1px solid black;
+}

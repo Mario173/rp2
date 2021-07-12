@@ -74,7 +74,7 @@ function iscrtaj_lijevo() {
         iscrtaj_highscore('Memory');
     });
 
-    $("#Vješala").on("#click", function() {
+    $("#Vješala").on("click", function() {
         pokreni_vješala();
         iscrtaj_highscore('Vješala');
     });
