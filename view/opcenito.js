@@ -13,6 +13,9 @@ var start = 'Potapanje_brodova'; // koja igra je početna, nije baš ni bitno
 
 
 function iscrtaj_lijevo() {
+
+    console.log("Ovo trazis " +document.location.pathname);
+
     var contents = '';
     for(var i = 0; i < igre.length; i++) {
         if( i === 0 ) {
@@ -157,55 +160,3 @@ function iscrtaj_reviews(koji){
 
 }
 
-function sendReview(){
-    let rating = $("#rating").val();
-    let comment = $("#comment").val();
-    if( rating >= 1 && rating <= 5){
-        $.ajax(
-            {   
-                type: "POST",
-                url: "/~marjamar/Projekt/index.php?rt=igre/review_game",
-                data:
-                {
-                    id_game: game_id,
-                    rating: rating,
-                    comment: comment
-                    
-                },
-                success: function( data )
-                {
-                    // Jednostavno sve što dobiješ od servera stavi u dataset.
-                    console.log(data);
-                    console.log("uspjesan review");
-                    //$( "#datalist_imena" ).html( data );
-                },
-                error: function( xhr, status )
-                {
-                    if( status !== null )
-                        console.log( "Greška prilikom Ajax poziva: " + status );
-                }
-            } );
-    }
-}
-
-function napravi_review_div(){
-    let review_div = $("<div id = ship_review_div></div>");
-
-    review_div.html(
-    "<h2>Ocjenite igru</h2><select name=\"rating\" id=\"rating\"><option selected=\"selected\" disabled=\"disabled\">" +
-    "Please select...</option>" +
-    "<option value=\"1\">1</option>" +
-    "<option value=\"2\">2</option>" +
-    "<option value=\"3\">3</option>" +
-    "<option value=\"4\">4</option>" +
-    "<option value=\"5\">5</option></select>" +
-    "<br><br>" +
-    "<textarea name=\"comment\" id=\"comment\" rows=\"4\" cols=\"40\"></textarea>" + 
-    "<br><br>" +
-    "<input type=\"submit\" id = \"reviewButton\" name=\"btnSubmit\" value= \"Ocjeni!\"/>"
-    );
-
-    $("#middle").append(review_div);
-
-    $("#reviewButton").on("click", sendReview);
-}

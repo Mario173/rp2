@@ -17,6 +17,8 @@ function pokreni_križić_kružić() {
     $("#name_of_the_game").html('Križić-kružić');
     $("won").html('');
 
+    napravi_review_div();
+
     var clicked = false;
     broj_poteza = 0;
 
@@ -35,6 +37,8 @@ function pokreni_križić_kružić() {
 }
 
 function pokreni_križić_kružić_nastavi() {
+
+    game_id = 4;
 
     $("#middle").html('<h1 id="name_of_the_game"></h1><canvas id="cnv"></canvas>' +
         '<br> <br><button id="again">Hoću sve ispočetka!</button><div id="game_id"></div><div id="won"></div></div>');
