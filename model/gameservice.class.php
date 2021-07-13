@@ -127,7 +127,7 @@ class GameService {
 		{
 			$db = DB::getConnection();
 			$st = $db->prepare( 'SELECT id, id_user, id_achievement, date_achieved FROM
-                project_unlocked_achievements WHERE id_user = :id_user');
+                project_unlocked_achievements WHERE id_user = :id_user ORDER BY id DESC');
 			$st->execute( array( 'id_user' => $id_user ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -135,7 +135,7 @@ class GameService {
 		$arr = array();
 		while( $row = $st->fetch() )
 		{
-			$arr[] = new Unlocked_Achievement( $row['id'], $row['id_game'],  $row['id_achievement'], $row['date_achieved'] );
+			$arr[] = new Unlocked_Achievement( $row['id'], $row['id_user'],  $row['id_achievement'], $row['date_achieved'] );
 		}
 
 		return $arr;
@@ -149,6 +149,26 @@ class GameService {
 			$st = $db->prepare( 'SELECT id, id_game, id_user, rating, comment FROM
                 project_reviews WHERE id_game = :id_game ORDER BY id DESC LIMIT 5');
 			$st->execute( array( 'id_game' => $id_game ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Review( $row['id'], $row['id_game'],  $row['id_user'], $row['rating'], $row['comment'] );
+		}
+
+		return $arr;
+	}
+
+	function getReviewsByUser($id_user)
+    {
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT id, id_game, id_user, rating, comment FROM
+                project_reviews WHERE id_user = :id_user ORDER BY rating');
+			$st->execute( array( 'id_user' => $id_user ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 

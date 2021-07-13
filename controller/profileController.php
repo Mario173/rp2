@@ -32,15 +32,34 @@ class ProfileController extends BaseController
 			}
 		}
 		
-
 		$favorite_games_array = $gs->getFavoriteGamesByUser($user_id);
 		$favorite_games_names_array = array();
 		foreach( $favorite_games_array as $fav_game){
 			$favorite_games_names_array[] = $gs->getGameById($fav_game->id_game)->name;
 		}
-		
 
+		$reviews_array = array();
+		$reviews = $gs->getReviewsByUser($user_id);
+		foreach($reviews as $el){
+			$temp_el = array();
+			$temp_el[0] = $gs->getGameById($el->id_game)->name;
+			$temp_el[1] = $el->rating;
+			$temp_el[2] = $el->comment;
+			$reviews_array[] = $temp_el;
+		}
+
+		$achievements_array = array();
+		$achievements = $gs->getAchievementsByUser($user_id);
+		foreach($achievements as $el){
+			$temp_el = array();
+			$temp_el[0] = $gs->getAchievementById($el->id_achievement)->name;
+			$temp_el[1] = $el->date_achieved;
+			$achievements_array[] = $temp_el;
+		}
+		
+		$this->registry->template->achievements_array = $achievements_array;
 		$this->registry->template->high_scores = $high_scores_array;
+		$this->registry->template->reviews_array = $reviews_array;
 		$this->registry->template->username = $username;
 
 		$this->registry->template->show( 'profile' );

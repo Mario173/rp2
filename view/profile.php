@@ -21,13 +21,22 @@
     </ul>
     <h3>My achievements: </h3>
     <ul id="achievements">
+        <?php 
+            foreach($achievements_array as $achievement){
+                echo "<li><b>" . $achievement[0] . "</b>" . " " . $achievement[1] . "</li>";
+            }
+        ?>
         <!-- priko nekog .js file-a ili neke skripte povuci -->
     </ul>
 </div>
 <div id="bottom-right">
 <h3>My reviews: </h3>
     <ul id="reviews">
-
+        <?php 
+            foreach($reviews_array as $review){
+                echo "<li><b>" . $review[0] . "</b>" . " " . $review[1]  . " " . $review[2] . "</li>";
+            }
+        ?>
     </ul>
 </div>
 

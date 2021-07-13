@@ -6,7 +6,7 @@ class Achievement{
     function __construct($id, $id_game, $name, $description, $required_score){
         $this->id =  $id;
         $this->id_game =  $id_game;
-        $this->id_name = $name;
+        $this->name = $name;
         $this->description = $description;
         $this->required_score =  $required_score;
     }
