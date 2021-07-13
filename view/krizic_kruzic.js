@@ -17,7 +17,7 @@ function pokreni_križić_kružić() {
     $("#name_of_the_game").html('Križić-kružić');
     $("won").html('');
 
-    napravi_review_div();
+    napravi_review_div
 
     var clicked = false;
     broj_poteza = 0;
@@ -47,7 +47,7 @@ function pokreni_križić_kružić_nastavi() {
     $("#won").html('');
 
 
-    napravi_review_div();
+    napravi_review_div
 
     // možda biranje simbola prvo
 

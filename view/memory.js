@@ -25,7 +25,7 @@ function pokreni_memory() {
     $("#name_of_the_game").html('Memory');
     $("#won").html('');
 
-    napravi_review_div();
+    napravi_review_div
 
     postavi_ikone();/*
     $.ajax({

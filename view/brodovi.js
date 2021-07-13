@@ -22,7 +22,7 @@ game_id = 1;
     $("#won").html('');
     
 
-    napravi_review_div();
+    napravi_review_div
 
 
     // varijabla koja ce brojati koliko puta smo slali poredak brodova na provjeru, ako je samo jednom trebas imati max score 10 000
