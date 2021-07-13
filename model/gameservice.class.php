@@ -115,7 +115,7 @@ class GameService {
 		{
 			$db = DB::getConnection();
 			$st = $db->prepare( 'SELECT id, id_game, id_user, rating, comment FROM
-                project_reviews WHERE id_game = :id_game');
+                project_reviews WHERE id_game = :id_game ORDER BY id DESC LIMIT 5');
 			$st->execute( array( 'id_game' => $id_game ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
@@ -127,6 +127,22 @@ class GameService {
 		}
 
 		return $arr;
+	}
+
+	function checkIfReviewExists($id_game, $id_user){
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT id, id_game, id_user,rating, comment FROM project_reviews WHERE id_user = :id_user AND id_game = :id_game ;');
+			$st->execute( array( 'id_user' => $id_user, 'id_game' => $id_game ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$row = $st->fetch();
+		if( $row === false )
+			return false;
+		else
+			return true;
 	}
 
     function getFavoriteGamesByUser($id_user)
@@ -220,6 +236,29 @@ class GameService {
 			return false;
 		else
 			return true;
+	}
+
+	function addReview($id_game, $id_user, $rating, $comment){
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'INSERT INTO project_reviews(id_game, id_user, rating,comment) VALUES(:id_game, :id_user, :rating,:comment);');
+			$st->execute( array( 'id_user' => $id_user, 'id_game' => $id_game, 'rating' => $rating, 'comment' => $comment) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
+
+	function updateReview($id_game, $id_user, $rating, $comment){
+		// Sad napokon možemo stvoriti novi loan (možda bi trebalo provjeriti i da ta knjiga nije već posuđena...)
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'UPDATE project_reviews
+									SET rating = :rating, comment = :comment 
+									WHERE id_game = :id_game AND id_user = :id_user');
+			$st->execute( array( 'id_game' => $id_game, 'id_user' => $id_user, 'rating' => $rating, 'comment' => $comment) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
 
 	function updateHighScore( $id_game, $id_user, $high_score){

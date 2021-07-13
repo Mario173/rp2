@@ -102,6 +102,16 @@ h2 {
     border-collapse: collapse;
 }
 
+#tablica_reviews {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cell_review {
+    border: 1px solid black;
+    text-align: center;
+}
+
 #main_title {
     text-align: center;
     margin: 0;

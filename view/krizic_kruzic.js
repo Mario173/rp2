@@ -3,11 +3,16 @@ var check = [['', '', ''], ['', '', ''], ['', '', '']];
 var positions_left = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 function pokreni_križić_kružić() {
+
+    game_id = 4;
+
     $("#middle").html('<h1 id="name_of_the_game"></h1><canvas id="cnv"></canvas>' +
         '<br> <br><button id="again">Hoću sve ispočetka!</button><div id="game_id"></div><div id="won"></div></div>');
     
     $("#name_of_the_game").html('Križić-kružić');
     $("#won").html('');
+
+    napravi_review_div();
 
     // možda biranje simbola prvo
 
@@ -140,3 +145,10 @@ function resetiraj() {
 
     pokreni_križić_kružić();
 }
+
+function resetiraj() {
+    $("#won").html('');
+
+    pokreni_brodove();
+}
+

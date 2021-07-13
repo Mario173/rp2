@@ -1,6 +1,10 @@
 var board, check_list;
+var igra_id = 1;
 
 function pokreni_brodove() {
+
+    game_id = 1;
+
     $("#middle").html('<h1 id="name_of_the_game"></h1><div id="place_for_table"></div><div id="ships_and_buttons">' + 
         'Brodovi koje treba rasporediti:<br><div id="ships"></div><br> <br><button id="check">Provjeri!</button>' + 
         '<br> <br><button id="again">Hoću sve ispočetka!</button><div id="game_id"></div><div id="won"></div></div>');
@@ -8,6 +12,8 @@ function pokreni_brodove() {
     $("#name_of_the_game").html('Potapanje brodova');
     $("#won").html('');
     
+    napravi_review_div();
+
     create_ships();
     
     $.ajax({

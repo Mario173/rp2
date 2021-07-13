@@ -6,6 +6,8 @@ var abeceda = "ABCČĆDĐEFGHIJKLMNOPRSŠTUVZŽ";
 
 function pokreni_vješala()
 {
+    game_id = 3;
+
     console.log(" usli smo u pokreni vjesala");
     // postavi početne gumbe da korisnik izabere tip igre
     // daj korisniku da izabere težinu igre
@@ -22,6 +24,7 @@ function pokreni_vješala()
     $("#name_of_the_game").html('Vješala');
     $("#won").html('');
 
+    napravi_review_div();
     // težinu bismo htjeli dobiti preko radio buttona
 
     // odaberi riječ preko ajaxa, ali ovdje za pocetak cemo random inace mozda napraviti fju za to tipa init rijec
@@ -278,4 +281,12 @@ function gameOver()
     ctx.fillStyle = "red"; ctx.font = "bold 80px Verdana"; ctx.textAlign = "left";
     ctx.fillRect(50,50,200,50); ctx.strokeText('Game Over', 80, 80, 200 )
 }
+
+
+function resetiraj() {
+    $("#won").html('');
+
+    pokreni_brodove();
+}
+
 

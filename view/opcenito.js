@@ -4,10 +4,13 @@ highscore['Potapanje_brodova'] = ['User1', 147, 'User2', 144, 'User3', 133]; // 
 highscore['Memory'] = ['User2', 104, 'User6', 99, 'User1', 80];
 highscore['Vješala'] = ['User1', 100, 'User6', 92, 'User1', 81];
 highscore['Križić-kružić'] = ['User2', 112, 'User2', 105, 'User1', 80];
+var game_id;
+var reviews_data;
 
 var avatari = ['view/avatar.webp', 'view/avatar2.jpg', 'view/icon.png'], curr_avatar = 0, num_of_avatars = 3; // za avatare
 
 var start = 'Potapanje_brodova'; // koja igra je početna, nije baš ni bitno
+
 
 function iscrtaj_lijevo() {
     var contents = '';
@@ -35,7 +38,8 @@ function iscrtaj_lijevo() {
             break;
     };
 
-    iscrtaj_highscore(start);
+    iscrtaj_highscore(1);
+    iscrtaj_reviews(1);
 
     $(".naslovi").mouseenter( function() {
         $(this).css("background-color", "lightsteelblue");
@@ -66,29 +70,142 @@ function iscrtaj_lijevo() {
 
     $("#Potapanje_brodova").on("click", function() {
         pokreni_brodove();
-        iscrtaj_highscore('Potapanje_brodova');
+        iscrtaj_highscore(1);
+        iscrtaj_reviews(1);
     });
 
     $("#Memory").on("click", function() {
         pokreni_memory();
-        iscrtaj_highscore('Memory');
+        iscrtaj_highscore(2);
+        iscrtaj_reviews(2);
     });
 
     $("#Vješala").on("click", function() {
         pokreni_vješala();
-        iscrtaj_highscore('Vješala');
+        iscrtaj_highscore(3);
+        iscrtaj_reviews(3);
     });
 
     $("#Križić-kružić").on("click", function() {
         pokreni_križić_kružić();
-        iscrtaj_highscore('Križić-kružić');
+        iscrtaj_highscore(4);
+        iscrtaj_reviews(4);
     });
 }
 
 function iscrtaj_highscore(koji) {
-    let contents = '';
-    for(var i = 0; i < highscore[koji].length; i += 2) {
-        contents += ('<tr><td class="cell_high">' + highscore[koji][i] + '</td><td class="cell_high">' + highscore[koji][i + 1] + '</td><tr>');
+
+    $.ajax(
+        {   
+            type: "POST",
+            url: "/~marjamar/Projekt/index.php?rt=igre/get_highscores",
+            data:
+            {
+                id_game: koji,
+                
+            },
+            success: function( data )
+            {
+                // Jednostavno sve što dobiješ od servera stavi u dataset.
+                //console.log(data);
+                //console.log("uspjesan review");
+                reviews_data = data.array;
+                let contents = '';
+                for(var i = 0; i < reviews_data.length; i += 1) {
+                    contents += ('<tr><td class="cell_high">' + reviews_data[i][0] + '</td><td class="cell_high">' + reviews_data[i][1] + '</td><tr>');
+                }
+                $("#tablica_highscore").html(contents);
+                //$( "#datalist_imena" ).html( data );
+            },
+            error: function( xhr, status )
+            {
+                if( status !== null )
+                    console.log( "Greška prilikom Ajax poziva: " + status );
+            }
+        } );
+}
+
+function iscrtaj_reviews(koji){
+    $.ajax(
+        {   
+            type: "POST",
+            url: "/~marjamar/Projekt/index.php?rt=igre/get_reviews",
+            data:
+            {
+                id_game: koji,
+                
+            },
+            success: function( data )
+            {
+                // Jednostavno sve što dobiješ od servera stavi u dataset.
+                //console.log(data);
+                //console.log("uspjesan review");
+                reviews_data = data.array;
+                let contents = '';
+                for(var i = 0; i < reviews_data.length; i += 1) {
+                    contents += ('<tr><td class="cell_review">' + reviews_data[i][0] + '</td><td class="cell_review">' + reviews_data[i][1] + '</td><td class="cell_review">' + reviews_data[i][2] + '</td><tr>');
+                }
+                $("#tablica_reviews").html(contents);
+                //$( "#datalist_imena" ).html( data );
+            },
+            error: function( xhr, status )
+            {
+                if( status !== null )
+                    console.log( "Greška prilikom Ajax poziva: " + status );
+            }
+        } );
+
+}
+
+function sendReview(){
+    let rating = $("#rating").val();
+    let comment = $("#comment").val();
+    if( rating >= 1 && rating <= 5){
+        $.ajax(
+            {   
+                type: "POST",
+                url: "/~marjamar/Projekt/index.php?rt=igre/review_game",
+                data:
+                {
+                    id_game: game_id,
+                    rating: rating,
+                    comment: comment
+                    
+                },
+                success: function( data )
+                {
+                    // Jednostavno sve što dobiješ od servera stavi u dataset.
+                    console.log(data);
+                    console.log("uspjesan review");
+                    //$( "#datalist_imena" ).html( data );
+                },
+                error: function( xhr, status )
+                {
+                    if( status !== null )
+                        console.log( "Greška prilikom Ajax poziva: " + status );
+                }
+            } );
     }
-    $("#tablica_highscore").html(contents);
+}
+
+function napravi_review_div(){
+    let review_div = $("<div id = ship_review_div></div>");
+
+    review_div.html(
+    "<h2>Ocjenite igru</h2><select name=\"rating\" id=\"rating\"><option selected=\"selected\" disabled=\"disabled\">" +
+    "Please select...</option>" +
+    "<option value=\"1\">1</option>" +
+    "<option value=\"2\">2</option>" +
+    "<option value=\"3\">3</option>" +
+    "<option value=\"4\">4</option>" +
+    "<option value=\"5\">5</option></select>" +
+    "<br><br>" +
+    "<textarea name=\"comment\" id=\"comment\" rows=\"4\" cols=\"40\"></textarea>" + 
+    "<br><br>" +
+    "<input type=\"submit\" id = \"reviewButton\" name=\"btnSubmit\" value= \"Ocjeni!\"/>"
+    );
+
+    $("#middle").append(review_div);
+
+    $("#reviewButton").on("click", sendReview);
 }

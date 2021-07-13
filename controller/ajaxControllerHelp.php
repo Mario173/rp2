@@ -1,7 +1,23 @@
 <?php
 
-require_once 'igreController.php';
+//require_once 'igreController.php';
 
+
+if( isset($_POST['q'])){
+    //$imena = [ "Ana", "Ante", "Boris", "Maja", "Marko", "Mirko", "Slavko", "Slavica" ];
+    $q = $_POST[ "q" ];
+
+    $gs = new GameService();
+
+    $imena = $gs->getAllUsernames();
+
+    // Protrči kroz sva imena i vrati HTML kod <option> za samo ona 
+    // koja sadrže string q kao podstring.
+    foreach( $imena as $ime )
+        if( strpos( $ime, $q ) !== false )
+            echo "<option value='" . $ime . "' />\n";
+}
+/*
 if( isset($_POST['game']) ) {
     $temp = new IgreController();
     switch ( $_POST['game'] ) {
@@ -24,5 +40,7 @@ if( isset($_POST['game']) ) {
             break;
     };
 } 
+
+*/
 
 ?>

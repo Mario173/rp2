@@ -15,6 +15,10 @@
 <div id="right">
     <h2>Highscore</h2>
     <table id="tablica_highscore"></table>
+    <br>
+    <br>
+    <h2>Reviews</h2>
+    <table id="tablica_reviews"></table>
 </div>
 
 <script>

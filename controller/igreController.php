@@ -150,7 +150,61 @@ class IgreController extends BaseController
 
 		$data['riječ'] = $dictionary[$koji];
 
-		sendJSONandExit( $data );
+		$this->sendJSONandExit( $data );
+	}
+
+	public function review_game(){
+		if( isset($_POST['id_game'])){
+			$id_game = $_POST['id_game'];
+			$rating = $_POST['rating'];
+			$id_user = $_SESSION['logged_user_id'];
+			$comment = $_POST['comment'];
+	
+			$gs = new GameService();
+
+			if( $gs-> checkIfReviewExists($id_game,$id_user, $rating, $comment)){
+				$gs->updateReview($id_game,$id_user, $rating, $comment);
+			}
+			else{
+				$gs->addReview($id_game,$id_user, $rating, $comment);
+			}
+			echo "$comment" . "rating je " . $rating;
+		}
+	}
+
+	public function get_reviews(){
+		if( isset($_POST['id_game'])){
+			$gs = new GameService();
+			$arr = array();
+			$tmp_arr = array();
+			$tmp_arr = $gs->getReviewsByGame($_POST['id_game']);
+			foreach($tmp_arr as $el){
+				$tmp_el = array();
+				$tmp_el[0] = $gs->getUserById($el->id_user)->username;
+				$tmp_el[1] = $el->rating;
+				$tmp_el[2] = $el->comment;
+				$arr[] = $tmp_el;
+			}
+			$message['array'] = $arr;
+			$this->sendJSONandExit($message);
+		}
+	}
+
+	public function get_highscores(){
+		if( isset($_POST['id_game'])){
+			$gs = new GameService();
+			$arr = array();
+			$tmp_arr = array();
+			$tmp_arr = $gs->getHighScoresByGame($_POST['id_game']);
+			foreach($tmp_arr as $el){
+				$tmp_el = array();
+				$tmp_el[0] = $gs->getUserById($el->id_user)->username;
+				$tmp_el[1] = $el->high_score;
+				$arr[] = $tmp_el;
+			}
+			$message['array'] = $arr;
+			$this->sendJSONandExit($message);
+		}
 	}
 }; 
 

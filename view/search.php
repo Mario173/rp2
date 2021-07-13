@@ -4,7 +4,7 @@
 
 <form method="post" action="<?php echo __SITE_URL; ?>/index.php?rt=search/searchResults">
 	Unesi ime igrača:
-	<input id = "search_textbox" type="text" list="datalist_imena" name="product_name" />
+	<input id = "search_textbox" type="text" list="datalist_imena" name="username" />
 	<datalist id="datalist_imena"></datalist>
 	<button id = "search_button" type = "submit">Traži</button>
 </form>

@@ -4,16 +4,24 @@ var table = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', '
 
 var which_icon = [];
 
+var igra_id = 2;
+
 var broj_grešaka = 0;
 
 function pokreni_memory() {
     točne_kućice = 0;
 
+    game_id = 2;
+
     $("#middle").html('<h1 id="name_of_the_game"></h1><div id="place_for_table_memory"></div>' + 
         '<br /><br /><button id="again">Hoću sve ispočetka!</button><div id="won"></div>');
     
+
+
     $("#name_of_the_game").html('Memory');
     $("#won").html('');
+
+    napravi_review_div();
 
     postavi_ikone();/*
     $.ajax({
