@@ -91,7 +91,7 @@ async function klikNaPloču() {
                 
                 // buduci je to igra gotova i pobjeda, saljemo serveru score ( i id igre ) ajaxom na obradu
                 $.ajax({
-                    url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+                    url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
                     type: "POST",
                     // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
                     data: {

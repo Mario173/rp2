@@ -296,7 +296,7 @@ function pobjeda()
     ctx.strokeText("SCORE: "+score, 120, 130, 150);
 
     $.ajax({
-        url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+        url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
         type: "POST",
         // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
         data: {

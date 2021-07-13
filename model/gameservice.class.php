@@ -220,7 +220,7 @@ class GameService {
 		{
 			$db = DB::getConnection();
 			$st = $db->prepare( 'SELECT id, id_game, id_user, high_score, date_achieved FROM
-                project_high_scores WHERE id_game = :id_game');
+                project_high_scores WHERE id_game = :id_game ORDER BY high_score DESC LIMIT 5;');
 			$st->execute( array( 'id_game' => $id_game ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }

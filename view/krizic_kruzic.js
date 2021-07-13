@@ -5,11 +5,11 @@ var gameid = 4, broj_poteza;
 
 // funkcija koja služi za pokretanje igre
 function pokreni_križić_kružić() {
-<<<<<<< HEAD
+
 
     game_id = 4;
 
-=======
+
     // odaberi simbol
     $("#middle").html('<h1 id="name_of_the_game"></h1>Koji simbol birate?' 
                     + '<br /><button id="x">X</button><button id="o">O</button>');
@@ -35,21 +35,21 @@ function pokreni_križić_kružić() {
 }
 
 function pokreni_križić_kružić_nastavi() {
->>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
+
     $("#middle").html('<h1 id="name_of_the_game"></h1><canvas id="cnv"></canvas>' +
         '<br> <br><button id="again">Hoću sve ispočetka!</button><div id="game_id"></div><div id="won"></div></div>');
     
     $("#name_of_the_game").html('Križić-kružić');
     $("#won").html('');
 
-<<<<<<< HEAD
+
     napravi_review_div();
 
     // možda biranje simbola prvo
 
-=======
+
     // funkcija koja služi za iscrtavanje ploče
->>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
+
     create_board();
 
     // funkcija koja se poziva na klik na canvas
@@ -184,7 +184,7 @@ function ispiši_pobjedu( symbol ) {
         $("#won").html('Žao mi je, izgubili ste. :(');
     }
     $.ajax({
-        url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+        url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
         type: "POST",
         // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
         data: {

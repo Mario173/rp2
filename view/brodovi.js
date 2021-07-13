@@ -1,19 +1,18 @@
-<<<<<<< HEAD
 var board, check_list;
 var igra_id = 1;
-=======
+
 var board, check_list, gameid=1;
->>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
+
 
 // funkcija koja služi za pokretanje igre Potapanje brodova
 function pokreni_brodove() {
-<<<<<<< HEAD
 
-    game_id = 1;
 
-=======
+game_id = 1;
+
+
     // ispiše strukturu za srednji div, tj samo igru
->>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
+
     $("#middle").html('<h1 id="name_of_the_game"></h1><div id="place_for_table"></div><div id="ships_and_buttons">' + 
         'Brodovi koje treba rasporediti:<br><div id="ships"></div><br> <br><button id="check">Provjeri!</button>' + 
         '<br> <br><button id="again">Hoću sve ispočetka!</button><div id="game_id"></div><div id="won"></div></div>');
@@ -22,15 +21,15 @@ function pokreni_brodove() {
     $("#name_of_the_game").html('Potapanje brodova');
     $("#won").html('');
     
-<<<<<<< HEAD
+
     napravi_review_div();
 
-=======
+
     // varijabla koja ce brojati koliko puta smo slali poredak brodova na provjeru, ako je samo jednom trebas imati max score 10 000
     var broj_provjera = 0;
 
     // stvori slikice za brodove koje se nalaze desno od same tablice na kojoj se igra
->>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
+
     create_ships();
     
     // ajax poziv, služi za dohvaćanje podataka o tome gdje se nala brodovi i koji je id igre
@@ -316,7 +315,7 @@ function provjeri() {
         // ovdje ide dodavanje bodova useru
         let score = 10000 / broj_provjera;
         $.ajax({
-            url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+            url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
             type: "POST",
             // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
             data: {
@@ -339,10 +338,10 @@ function provjeri() {
 function resetirajBrodove() {
     $("#won").html(''); // postavi da još nitko nije pobjedio
 
-<<<<<<< HEAD
+
     pokreni_brodove();
 }
-=======
+
     pokreni_brodove(); // opet pokreni sve ispočetka
-}
->>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
+
+
