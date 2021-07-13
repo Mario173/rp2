@@ -146,11 +146,13 @@ class IgreController extends BaseController
 	public function generiraj_vjesala() {
 		$dictionary = ['RIJEČ', 'VJEŠALA', 'POKUŠAJ', 'SNTNTN', 'LOKOMOTIVA', 'MATEMATIKA', 'TRIGONOMETRIJA', 'KUĆA', 'JAHTA', 'SEDLO'];
 
+		$data["id"] = $_SESSION['logged_user_id'];
 		$koji = rand(0, count($dictionary));
 
 		$data['riječ'] = $dictionary[$koji];
 
 		$this->sendJSONandExit( $data );
+
 	}
 
 	public function review_game(){
@@ -205,7 +207,94 @@ class IgreController extends BaseController
 			$message['array'] = $arr;
 			$this->sendJSONandExit($message);
 		}
+
 	}
+
+	public function obradiRezultate()
+	{
+		// 
+		// $igre = array( "potapanje_brodova" => 1, "memory" => 2, "vjesala" => 3, "krizic_kruzic" => 4 );
+		// funkcija koja je najmjenjana obradi score-a kojeg je user postigao na kraju igre
+		// gleda se je li to highscore, je li unlockan achievment
+		if( isset($_SESSION['logged_user_id']) )
+			$id = $_SESSION['logged_user_id'];
+		else
+		{
+			// user nije ulogiran
+			header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
+            exit();
+		}
+		// game treba biti u postu i prakticki uvijek i hoce
+		if( isset($_POST['game']) && isset($_POST['score']) )
+		{
+			$gameid = $_POST['game'];
+			$score = $_POST['score'];
+		}
+		else
+		{
+			$this->sendJSONandExit("nisu poslani svi potrebni podaci");
+			//  ˇ there is no such thing as overkill 
+			return false;
+		}	
+
+		$GS = new GameService();
+		
+		// provjera je li ovo highscore i ako jest, onda ga postaviti u bazu
+		if( $GS->checkIfHighScoreExists($gameid, $id) )
+		{
+			echo '<p>highscore postoji</p>';
+			$highScore = $GS->getHighScoreByIds($gameid, $id);
+			print_r( $highScore);
+			echo 'Echo: ' . $highScore->high_score;
+			if( $highScore->high_score < $score )
+			{
+				//trenutni highscore je manji od upravo postignutog, sad u bazu stavi novi HS
+				$GS->updateHighScore($gameid, $id, $score );
+			}
+			// sendJSONandExit("postavili smo novi highscore:" . $score . " za: " . $id);
+		}
+		else{
+			echo 'user dosad nije imao high score';
+			$GS->addHighScore($gameid, $id, $score);
+			//sendJSONandExit("postavili smo novi highscore:" . $score . " za: " . $id);
+		}
+
+		// sad idemo provjeriti koje sve achievmente moze dobiti za ovu igru i jesu li vec otkljucani
+		// koje achievmente ima user
+		echo 'get Achievment by User ';
+		$unlocked = $GS->getAchievementsByUser($id);
+		// koji su achievmneti moguci za tu igru
+		echo 'get Achievment by game ';
+		$achiev = $GS->getAchievementByGame($gameid);
+		// sada treba proci po svim achiev, pogledati je li score dovoljan, ako jest i ako nije vec u unlocked ubaci ga u tablicu kao novog
+		echo 'idemo sada na achievmente ';
+		foreach ($achiev as $value) {
+			# code...
+			// ako nemamo dovoljan score idi na slijedeci achievment
+			echo 'req: '.  $value->required_score .' ? score: ' . $score;
+			if( $value->required_score > $score )
+				continue;
+			$flag = true;
+			echo '$valueID= ' . $value->id;
+			foreach ($unlocked as $val) {
+				# code...
+				echo '   valIdAchievement= ' . $val->id_achievement;
+				if( $value->id === $val->id_achievement )
+					$flag = false;
+			}
+			if( $flag )
+			{
+				echo 'dodajemo novi achievement za ' . $id . ' ' . $value->id;
+				// dakle imamo dovoljan score i nijedan id iz achivmenta nije jednak ijednom iz ulockanih, dakle ubacimo ga u bazu
+				$GS->addAchievementByUser($id, $value->id);
+			}  
+		} 
+
+		$this->sendJSONandExit("high score i achievment update-an. userid=" . $id . " gameid=" . $gameid . " score=" . $score);
+		
+	}
+
+
 }; 
 
 ?>

@@ -89,12 +89,44 @@ class GameService {
 			return new Review( $row['id'], $row['id_game'], $row['id_user'], $row['rating'], $row['comment']);
     }
 
+	function getAchievementByGame($id_game){
+		// vraća array achievmenta koji su vezani za tu igru
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT id, id_game, name, description, required_score FROM
+                project_achievements WHERE id_game = :id_game');
+			$st->execute( array( 'id_game' => $id_game ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] = new Achievement( $row['id'], $row['id_game'],  $row['name'], $row['description'], $row['required_score'] );
+		}
+
+		return $arr;
+	}
+
+	function addAchievementByUser($id_user, $id_achievement){
+		// zelimo useru spremiti njegov achievment
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'INSERT INTO project_unlocked_achievements(id, id_user, id_achievement, date_achieved) 
+								VALUES(:id, :id_user, :id_achievement ,CURRENT_DATE());');
+			$st->execute( array( 'id' => NULL, 'id_user' => $id_user, 'id_achievement' => $id_achievement) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
+
     function getAchievementsByUser($id_user)
     {
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare( 'SELECT id, id_game, id_achievement, date_achieved FROM
+			$st = $db->prepare( 'SELECT id, id_user, id_achievement, date_achieved FROM
                 project_unlocked_achievements WHERE id_user = :id_user');
 			$st->execute( array( 'id_user' => $id_user ) );
 		}
@@ -278,8 +310,8 @@ class GameService {
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->prepare( 'INSERT INTO project_high_scores(id_game, id_user, date_achieved) VALUES(:id_game, :id_user, :high_score,CURRENT_DATE());');
-			$st->execute( array( 'id_user' => $id_user, 'id_game' => $id_game, 'high_score' => $high_score) );
+			$st = $db->prepare( 'INSERT INTO project_high_scores(id, id_game, id_user, high_score, date_achieved) VALUES(:id, :id_game, :id_user, :high_score,CURRENT_DATE());');
+			$st->execute( array( 'id' => NULL, 'id_user' => $id_user, 'id_game' => $id_game, 'high_score' => $high_score) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}

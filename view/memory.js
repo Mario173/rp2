@@ -4,9 +4,13 @@ var table = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', '
 
 var which_icon = [];
 
+
 var igra_id = 2;
 
 var broj_grešaka = 0;
+
+var broj_grešaka = 0, gameid = 2;
+
 
 function pokreni_memory() {
     točne_kućice = 0;
@@ -82,7 +86,27 @@ async function klikNaPloču() {
             točne_kućice++;
             if( točne_kućice === 18 ) {
                 $("#won").html('Čestitam, pobjeda!!!');
-                // računanje bodova i to
+                // računanje bodova i to - ja sam mislio mozda gledamo omjer broja pogresnih otvaranja i minimalnog potrebnog
+                let score = ( (točne_kućice/2)/( broj_grešaka + 1 ) ) * 10000;
+                
+                // buduci je to igra gotova i pobjeda, saljemo serveru score ( i id igre ) ajaxom na obradu
+                $.ajax({
+                    url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+                    type: "POST",
+                    // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
+                    data: {
+                        game: gameid,
+                        score: score
+                    },
+                    // datatype: "json",
+                    success: function(data){
+                        console.log("VJESALA: uspio ajax upit za postavljanje score u highscore|| ");
+                        console.log("data: "+data + "data.type" + typeof(data) );
+                    },
+                    error: function(data){
+                        console.log("greska u slanju ajax pobjede: " + data);
+                    }
+                });
             }
         } else {
             broj_grešaka++;

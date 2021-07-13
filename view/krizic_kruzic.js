@@ -1,28 +1,65 @@
-var choice = 0, won = 0;
-var check = [['', '', ''], ['', '', ''], ['', '', '']];
-var positions_left = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+var choice = 0, won = 0; // varijable koje prate koji je simbol igrač odabrao te je li pobjedio
+var check = [['', '', ''], ['', '', ''], ['', '', '']]; // polje koje prati na kojem je mjestu koji simbol
+var positions_left = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // polje koje prati koja mjesta su već označena
+var gameid = 4, broj_poteza;
 
+// funkcija koja služi za pokretanje igre
 function pokreni_križić_kružić() {
+<<<<<<< HEAD
 
     game_id = 4;
 
+=======
+    // odaberi simbol
+    $("#middle").html('<h1 id="name_of_the_game"></h1>Koji simbol birate?' 
+                    + '<br /><button id="x">X</button><button id="o">O</button>');
+
+    $("#name_of_the_game").html('Križić-kružić');
+    $("won").html('');
+
+    var clicked = false;
+    broj_poteza = 0;
+
+    // ako je kliknut gumb X, igrač je odabrao x
+    $("#x").on("click", function() {
+        choice = 0;
+        pokreni_križić_kružić_nastavi();
+    });
+
+    // ako je kliknut gumb O, igrač je odabrao o
+    $("#o").on("click", function() {
+        choice = 1;
+        pokreni_križić_kružić_nastavi();
+    });
+
+}
+
+function pokreni_križić_kružić_nastavi() {
+>>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
     $("#middle").html('<h1 id="name_of_the_game"></h1><canvas id="cnv"></canvas>' +
         '<br> <br><button id="again">Hoću sve ispočetka!</button><div id="game_id"></div><div id="won"></div></div>');
     
     $("#name_of_the_game").html('Križić-kružić');
     $("#won").html('');
 
+<<<<<<< HEAD
     napravi_review_div();
 
     // možda biranje simbola prvo
 
+=======
+    // funkcija koja služi za iscrtavanje ploče
+>>>>>>> 765470d68a02652b3f443e77e09e981ab4c7315a
     create_board();
 
+    // funkcija koja se poziva na klik na canvas
     $("#cnv").on("click", klikNaPloči);
 
+    // funkcija koja se poziva na klik na gumb Hoću sve ispočetka!
     $("#again").on("click", resetiraj);
 }
 
+// funkcija za iscrtavanje ploče na canvasu -> iscrta 3×3 grid
 function create_board() {
     var canvas = $("#cnv").get(0);
     var ctx = canvas.getContext("2d");
@@ -44,23 +81,26 @@ function create_board() {
     ctx.stroke();
 }
 
+// funkcija koja se izvrši kada korisnik klikne na ploču
 function klikNaPloči() {
     var canvas = $("#cnv").get(0);
     var ctx = canvas.getContext("2d");
 
+    // izračunaj koordinate klika na canvasu
     var x = event.clientX - canvas.getBoundingClientRect().left;
     var y = event.clientY - canvas.getBoundingClientRect().top;
 
+    // izračunaj u kojem se polju klik dogodio
     var koji_sirina = Math.floor((3 * x) / canvas.width);
     var koji_visina = Math.floor((3 * y) / canvas.height);
 
-    if( positions_left.indexOf(3 * koji_sirina + koji_visina) !== -1 ) {
-        if( won === 0 ) {
+    if( positions_left.indexOf(3 * koji_sirina + koji_visina) !== -1 ) { // ako je to polje već popunjeno, nemoj ništa napraviti
+        if( won === 0 ) { // ako je netko već pobjedio, nemoj ništa napraviti
             nacrtaj_simbol(koji_sirina, koji_visina, choice);
             provjeri_pobjedu();
         }
 
-        if( won === 0 && positions_left.length !== 0 ) {
+        if( won === 0 && positions_left.length !== 0 ) { // ako je netko već pobjedio ili su sva polja popunjena (izjednačeno), nemoj ništa napraviti
             // random generiraj idući potez
             var randomElement = positions_left[Math.floor(Math.random() * positions_left.length)];
 
@@ -69,11 +109,12 @@ function klikNaPloči() {
         }
     }
 
-    if( positions_left.length === 0 && won === 0 ) {
+    if( positions_left.length === 0 && won === 0 ) { // ako su sva polja popunjena i nitko nije pobjedio, onda je izjednačeno
         $("#won").html('Izjednačeno');
     }
 }
 
+// funkcija za crtanje simbola u odabranom polju
 function nacrtaj_simbol( koji_sirina, koji_visina, choice ) {
     var canvas = $("#cnv").get(0);
     var ctx = canvas.getContext("2d");
@@ -99,9 +140,13 @@ function nacrtaj_simbol( koji_sirina, koji_visina, choice ) {
         check[koji_sirina][koji_visina] = 'o';
     }
 
+    //ovo je moj dodatak da na neki nacin odredimo score, a ovdje je to preko broja poteza potrebnih za pobjedu
+    broj_poteza++;
+
     ctx.stroke();
 }
 
+// funkcija koja provjereva je li itko pobjedio
 function provjeri_pobjedu() {
     for(var i = 0; i < 2; i++) { // provjeri retke
         if( check[i][0] === check[i][1] && check[i][1] === check[i][2] && check[i][0] !== '') {
@@ -126,17 +171,38 @@ function provjeri_pobjedu() {
     }
 }
 
+// funkcija koja ispisuje tko je pobjedio
 function ispiši_pobjedu( symbol ) {
     var player = choice ? 'o' : 'x';
     won = 1;
+
+    let score = ( 6 - broj_poteza ) * 400;
 
     if( symbol === player ) {
         $("#won").html('Čestitam, pobjeda!!!');
     } else {
         $("#won").html('Žao mi je, izgubili ste. :(');
     }
+    $.ajax({
+        url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+        type: "POST",
+        // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
+        data: {
+            game: gameid,
+            score: score
+        },
+        // datatype: "json",
+        success: function(data){
+            console.log("Kriz - kruz: uspio ajax upit za postavljanje score u highscore ");
+            console.log("data: "+ data + "data.type" + typeof(data) );
+        },
+        error: function(data){
+            console.log("greska u slanju ajax pobjede: " + data);
+        }
+    });
 }
 
+// funkcija koja opet pokreće igru
 function resetiraj() {
     $("#won").html('');
     won = 0;
