@@ -1,5 +1,6 @@
 var board, check_list;
 var igra_id = 1;
+var broj_provjera = 0;
 
 var board, check_list, gameid=1;
 
@@ -8,7 +9,7 @@ var board, check_list, gameid=1;
 function pokreni_brodove() {
 
 
-game_id = 1;
+    game_id = 1;
 
 
     // ispiše strukturu za srednji div, tj samo igru
@@ -22,7 +23,7 @@ game_id = 1;
     $("#won").html('');
     
 
-    napravi_review_div
+    //napravi_review_div
 
 
     // varijabla koja ce brojati koliko puta smo slali poredak brodova na provjeru, ako je samo jednom trebas imati max score 10 000
@@ -36,7 +37,7 @@ game_id = 1;
     $.ajax({
         async: false,
         type: "GET",
-        url: "https://rp2.studenti.math.hr/~zbujanov/dz4/id.php",
+        url: "/~zecicmar/igre/igre/index.php?rt=igre/generiraj_potapanje",
         dataType: "json",
         success: function( data ) {
             $("#game_id").html(data['id']);
@@ -281,13 +282,14 @@ function provjeri() {
     $.ajax({
         async: false,
         type: "POST",
-        url: "https://rp2.studenti.math.hr/~zbujanov/dz4/check.php",
+        url: "/~zecicmar/igre/igre/index.php?rt=igre/provjeri_potapanje",
         data: {
-            id: $("#game_id").text(),
+            //id: $("#game_id").text(),
             list: lista
         },
-        dataType: "json",
+        dataType: 'json',
         success: function( data ) {
+            console.log(data);
             for(var i = 0; i < lista.length; i++) {
                 var j = parseInt(data[i]['row']) - 1;
                 var k = parseInt(data[i]['col']) - 1;
@@ -306,6 +308,8 @@ function provjeri() {
         error: function( xhr, status ) {
             if( status != null ) {
                 console.log('Ajax greška: ' + status);
+                //console.log( data );
+                console.log( lista );
             }
         }
     });
@@ -315,7 +319,7 @@ function provjeri() {
         // ovdje ide dodavanje bodova useru
         let score = 10000 / broj_provjera;
         $.ajax({
-            url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
+            url: "/~zecicmar/igre/igre/index.php?rt=igre/obradiRezultate",
             type: "POST",
             // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
             data: {

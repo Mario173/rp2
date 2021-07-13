@@ -1,6 +1,4 @@
 var puta_kliknuto = 1, prošli = [], točne_kućice = 0;
-var table = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-                'R', 'Q', 'P', 'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A' ];
 
 var which_icon = [];
 
@@ -27,11 +25,11 @@ function pokreni_memory() {
 
     napravi_review_div
 
-    postavi_ikone();/*
+    postavi_ikone();
     $.ajax({
         async: false,
         type: "POST",
-        url: "controller/ajaxControllerHelp.php", // ovde je problem, ne znan kako nać ajaxControllerHelp.php
+        url: "/~zecicmar/igre/igre/index.php?rt=igre/generiraj_memory",
         dataType: "json",
         data: {
             game: 'memory'
@@ -47,9 +45,9 @@ function pokreni_memory() {
                 console.log('Ajax greška: ' + status);
             }
         }
-    });*/
+    });
 
-    nacrtaj_tablicu( table ); // ovo maknite ako radi ajax
+    //nacrtaj_tablicu( table ); // ovo maknite ako radi ajax
 
     $(".field_memory").on("click", klikNaPloču);
 

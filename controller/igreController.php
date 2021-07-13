@@ -2,8 +2,6 @@
 
 class IgreController extends BaseController
 {
-	public $board = array();
-
 	public function index() 
 	{
 		$this->registry->template->show( 'igre' );
@@ -34,9 +32,9 @@ class IgreController extends BaseController
 	public function generiraj_potapanje() {
 		$data = [];
 
-		$this->board = array();
+		$board = array();
 		for($i = 0; $i < 10; $i++) {
-			$this->board[$i] = array_fill(0, 10, 0);
+			$board[$i] = array_fill(0, 10, 0);
 		}
 
 		// napuni ploču brodovima
@@ -47,10 +45,10 @@ class IgreController extends BaseController
 					$x = rand(0, 9);
 					$y = rand(0, 9);
 
-					$notFree = $this->slobodno($x, $y, $i, $this->board);
+					$notFree = $this->slobodno($x, $y, $i, $board);
 				}
 				for($k = 0; $k < $i; $k++) {
-					$this->board[$x + $k * $notFree[1][0]][$y + $k * $notFree[1][1]] = 1;
+					$board[$x + $k * $notFree[1][0]][$y + $k * $notFree[1][1]] = 1;
 				}
 			}
 		}
@@ -60,15 +58,17 @@ class IgreController extends BaseController
 		for($i = 0; $i < 10; $i++) {
 			$rows[$i] = 0;
 			for($j = 0; $j < 10; $j++) {
-				$rows[$i] += $this->board[$i][$j]; // 0 ako nema broda, 1 ako ima
+				$rows[$i] += $board[$i][$j]; // 0 ako nema broda, 1 ako ima
 			}
 		}
 		for($j = 0; $j < 10; $j++) {
 			$cols[$j] = 0;
 			for($i = 0; $i < 10; $i++) {
-				$cols[$j] += $this->board[$i][$j]; // 0 ako nema broda, 1 ako ima
+				$cols[$j] += $board[$i][$j]; // 0 ako nema broda, 1 ako ima
 			}
 		}
+		$_SESSION['board'] = $board;
+
 		$data['id'] = $cols[2] . '_' . $rows[1] . '_' . $rows[7] . $cols[8];
 		$data['rows'] = $rows;
 		$data['cols'] = $cols;
@@ -122,19 +122,27 @@ class IgreController extends BaseController
 	}
 
 	public function provjeri_potapanje() {
-		$id = $_POST['id'];
-		$lista = $_POST['list'];
+		#$id = $_POST['id'];
+		if( isset($_POST['list']) ) {
+			$lista = $_POST['list'];
+		}
+		else {
+			$this->sendJSONandExit("nisu poslani svi potrebni podaci");
+			//  ˇ there is no such thing as overkill 
+			return false;
+		}
+		$board = $_SESSION['board'];
 
 		$data = array();
-		$data['id'] = $id;
+		#$data['id'] = $id;
 
-		for($i = 0; $i < count($lista); $i++) {
-			if( $this->board[$lista[$i][0]][$lista[$i][1]] === 1 && $lista[$i][3] === 'ship' ) {
-				$lista[$i][] = 'correct';
-			} else if( $this->board[$lista[$i][0]][$lista[$i][1]] === 0 && $lista[$i][3] === 'sea' ) {
-				$lista[$i][] = 'correct';
+		foreach($lista as &$elem) {
+			if( $board[$elem['row'] - 1][$elem['col'] - 1] === 1 && $elem['type'] === 'ship' ) {
+				$elem['answer'] =  'correct';
+			} else if( $board[$elem['row'] - 1][$elem['col'] - 1] === 0 && $elem['type'] === 'sea' ) {
+				$elem['answer'] =  'correct';
 			} else {
-				$lista[$i][] = 'wrong';
+				$elem['answer'] =  'wrong';
 			}
 		}
 		// tu ide correct i wrong

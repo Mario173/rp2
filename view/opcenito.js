@@ -11,6 +11,25 @@ var avatari = ['view/avatar.webp', 'view/avatar2.jpg', 'view/icon.png'], curr_av
 
 var start = 'Potapanje_brodova'; // koja igra je početna, nije baš ni bitno
 
+function iscrtaj_gore() {
+
+    $("nav>ul>li").mouseenter( function() {
+        $(this).css("background-color", "lightsteelblue");
+        $(this).children().css("color", "black");
+    });
+
+    $("nav>ul>li").mouseleave( function() {
+        $(this).css("background-color", "#1A1A2E");
+        $(this).children().css("color", "#E94560");
+    });
+
+    $("#avatar").on("click", function() {
+        curr_avatar = (curr_avatar + 1) % num_of_avatars;
+        $("#avatar").attr('src', avatari[curr_avatar]); 
+    });
+
+}
+
 
 function iscrtaj_lijevo() {
 
@@ -56,21 +75,6 @@ function iscrtaj_lijevo() {
         $(this).css("cursor", "normal");
     });
 
-    $("nav>ul>li").mouseenter( function() {
-        $(this).css("background-color", "lightsteelblue");
-        $(this).children().css("color", "black");
-    });
-
-    $("nav>ul>li").mouseleave( function() {
-        $(this).css("background-color", "#1A1A2E");
-        $(this).children().css("color", "#E94560");
-    });
-
-    $("#avatar").on("click", function() {
-        curr_avatar = (curr_avatar + 1) % num_of_avatars;
-        $("#avatar").attr('src', avatari[curr_avatar]); 
-    });
-
     $("#Potapanje_brodova").on("click", function() {
         pokreni_brodove();
         iscrtaj_highscore(1);
@@ -101,7 +105,7 @@ function iscrtaj_highscore(koji) {
     $.ajax(
         {   
             type: "POST",
-            url: "/~marjamar/Projekt/index.php?rt=igre/get_highscores",
+            url: "/~zecicmar/igre/igre/index.php?rt=igre/get_highscores",
             data:
             {
                 id_game: koji,
@@ -132,7 +136,7 @@ function iscrtaj_reviews(koji){
     $.ajax(
         {   
             type: "POST",
-            url: "/~marjamar/Projekt/index.php?rt=igre/get_reviews",
+            url: "/~zecicmar/igre/igre/index.php?rt=igre/get_reviews",
             data:
             {
                 id_game: koji,
@@ -167,7 +171,7 @@ function sendReview(){
         $.ajax(
             {   
                 type: "POST",
-                url: "/~marjamar/Projekt/index.php?rt=igre/review_game",
+                url: "/~zecicmar/igre/igre/index.php?rt=igre/review_game",
                 data:
                 {
                     id_game: game_id,
