@@ -274,6 +274,25 @@ class GameService {
 		return $arr;
 	}
 
+	function getAllUsernames(){
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'SELECT * FROM
+                project_users;');
+			$st->execute();
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+
+		$arr = array();
+		while( $row = $st->fetch() )
+		{
+			$arr[] =$row['username'];
+		}
+
+		return $arr;
+	}
+
 
 
 

@@ -9,6 +9,7 @@
 	<script src="view/vjesala.js"></script>
 	<script src="view/krizic_kruzic.js"></script>
 	<script src="view/opcenito.js"></script>
+	<script src="view/search.js"></script>
 	<link rel="stylesheet" href="<?php echo __SITE_URL;?>/css/igre.css">
 	<script src="https://kit.fontawesome.com/dbccd0c414.js" crossorigin="anonymous"></script>
 </head>
