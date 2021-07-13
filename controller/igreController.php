@@ -160,9 +160,26 @@ class IgreController extends BaseController
 		// $igre = array( "potapanje_brodova" => 1, "memory" => 2, "vjesala" => 3, "krizic_kruzic" => 4 );
 		// funkcija koja je najmjenjana obradi score-a kojeg je user postigao na kraju igre
 		// gleda se je li to highscore, je li unlockan achievment
-		$id = $_SESSION['logged_user_id'];
-		$gameid = $_POST['game'];
-		$score = $_POST['score'];
+		if( isset($_SESSION['logged_user_id']) )
+			$id = $_SESSION['logged_user_id'];
+		else
+		{
+			// user nije ulogiran
+			header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
+            exit();
+		}
+		// game treba biti u postu i prakticki uvijek i hoce
+		if( isset($_POST['game']) && isset($_POST['score']) )
+		{
+			$gameid = $_POST['game'];
+			$score = $_POST['score'];
+		}
+		else
+		{
+			$this->sendJSONandExit("nisu poslani svi potrebni podaci");
+			//  ˇ there is no such thing as overkill 
+			return false;
+		}	
 
 		$GS = new GameService();
 		

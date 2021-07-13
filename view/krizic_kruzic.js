@@ -1,6 +1,7 @@
 var choice = 0, won = 0; // varijable koje prate koji je simbol igrač odabrao te je li pobjedio
 var check = [['', '', ''], ['', '', ''], ['', '', '']]; // polje koje prati na kojem je mjestu koji simbol
 var positions_left = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // polje koje prati koja mjesta su već označena
+var gameid = 4, broj_poteza;
 
 // funkcija koja služi za pokretanje igre
 function pokreni_križić_kružić() {
@@ -12,6 +13,7 @@ function pokreni_križić_kružić() {
     $("won").html('');
 
     var clicked = false;
+    broj_poteza = 0;
 
     // ako je kliknut gumb X, igrač je odabrao x
     $("#x").on("click", function() {
@@ -125,6 +127,9 @@ function nacrtaj_simbol( koji_sirina, koji_visina, choice ) {
         check[koji_sirina][koji_visina] = 'o';
     }
 
+    //ovo je moj dodatak da na neki nacin odredimo score, a ovdje je to preko broja poteza potrebnih za pobjedu
+    broj_poteza++;
+
     ctx.stroke();
 }
 
@@ -158,11 +163,30 @@ function ispiši_pobjedu( symbol ) {
     var player = choice ? 'o' : 'x';
     won = 1;
 
+    let score = ( 6 - broj_poteza ) * 400;
+
     if( symbol === player ) {
         $("#won").html('Čestitam, pobjeda!!!');
     } else {
         $("#won").html('Žao mi je, izgubili ste. :(');
     }
+    $.ajax({
+        url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+        type: "POST",
+        // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
+        data: {
+            game: gameid,
+            score: score
+        },
+        // datatype: "json",
+        success: function(data){
+            console.log("Kriz - kruz: uspio ajax upit za postavljanje score u highscore ");
+            console.log("data: "+ data + "data.type" + typeof(data) );
+        },
+        error: function(data){
+            console.log("greska u slanju ajax pobjede: " + data);
+        }
+    });
 }
 
 // funkcija koja opet pokreće igru

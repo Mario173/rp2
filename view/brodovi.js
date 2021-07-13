@@ -1,4 +1,4 @@
-var board, check_list;
+var board, check_list, gameid=1;
 
 // funkcija koja služi za pokretanje igre Potapanje brodova
 function pokreni_brodove() {
@@ -11,6 +11,9 @@ function pokreni_brodove() {
     $("#name_of_the_game").html('Potapanje brodova');
     $("#won").html('');
     
+    // varijabla koja ce brojati koliko puta smo slali poredak brodova na provjeru, ako je samo jednom trebas imati max score 10 000
+    var broj_provjera = 0;
+
     // stvori slikice za brodove koje se nalaze desno od same tablice na kojoj se igra
     create_ships();
     
@@ -198,6 +201,8 @@ function provjeri_brodove() {
             check_list[i][j] = 'N'; // vratimo listu provjerenih brodova na staro za sljedeću provjeru
         }
     }
+    // provjerili smo jesmo li dobro poslagali brodove, povecaj broj provjera
+    broj_provjera++;
 }
 
 // obojamo sve brodove natrag u crno
@@ -293,6 +298,24 @@ function provjeri() {
     if(flag === 1 && counter === 20) { // ako imamo točno 20 brodova i svi su na dobrim mjestima, pobjeda
         $("#won").html('Čestitam, pobjeda!!');
         // ovdje ide dodavanje bodova useru
+        let score = 10000 / broj_provjera;
+        $.ajax({
+            url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+            type: "POST",
+            // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
+            data: {
+                game: gameid,
+                score: score
+            },
+            // datatype: "json",
+            success: function(data){
+                console.log("VJESALA: uspio ajax upit za postavljanje score u highscore|| ");
+                console.log("data: "+data + "data.type" + typeof(data) );
+            },
+            error: function(data){
+                console.log("greska u slanju ajax pobjede: " + data);
+            }
+        });
     }
 }
 
