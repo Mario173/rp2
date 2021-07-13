@@ -1,4 +1,5 @@
 var score, rijec, tezina=2, duljinaRijeci, krivaSlova;
+var gameid = 3, ime = 'vješala', igrac;
 
 var easy_rijeci = ["MALO", "NETKO", "SUPER", "STOL", "DOBAR", "PAMET", "DVOBOJ", "LAPTOP", "SJEKIRA"];
 var teze_rijeci = ["MATEMATIKA", "ZAMIŠLJENO", "PETEROSTRUKO", "KVALITETNO"];
@@ -23,6 +24,29 @@ function pokreni_vješala()
     $("#won").html('');
 
     // težinu bismo htjeli dobiti preko radio buttona
+/*
+    $.ajax({
+        url: "/~vinkoben/Projekt/index.php?rt=igre/generiraj_vjesala",
+        type: "POST",
+        data: {
+            game: gameid
+        },
+        sucess: function(data){
+            console.log("pocetak vjesala, igraxc: " + data["id"]);
+            igrac = data["id"];
+            rijec = data["rijec"];
+
+            console.log("AJAX - rijec: " + rijec);
+
+            score = 0; krivaSlova = 0;
+            initCanvas();
+            
+        },
+        error: function(data){
+            console.log("VJESALA AJAX, error: " + data);
+        }
+    });
+*/
 
     // odaberi riječ preko ajaxa, ali ovdje za pocetak cemo random inace mozda napraviti fju za to tipa init rijec
     if( tezina === 1 )
@@ -42,9 +66,10 @@ function pokreni_vješala()
 
     score = 0; krivaSlova = 0;
     initCanvas();
+
     initIzbor();
 
-    console.log('inicijalizirali smo');
+    console.log('inicijalizirali smo i rijec je: ' + rijec + ' score=' + score);
     $("#provjeri").attr('disabled', false);
     $('#slovo').attr('disabled', false);
     $("#provjeri").on('click', provjeriRijec );
@@ -266,6 +291,26 @@ function pobjeda()
     ctx.strokeText("POBJEDA!!!", 80, 80, 150);
     ctx.strokeStyle = "black";
     ctx.strokeText("SCORE: "+score, 120, 130, 150);
+
+    $.ajax({
+        url: "/~vinkoben/Projekt/index.php?rt=igre/obradiRezultate",
+        type: "POST",
+        // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
+        data: {
+            id: igrac,
+            game: gameid,
+            score: score
+        },
+        // datatype: "json",
+        success: function(data){
+            console.log("VJESALA: uspio ajax upit za postavljanje score u highscore|| ");
+            console.log("data: "+data + "data.type" + typeof(data) );
+        },
+        error: function(data){
+            console.log("greska u slanju ajax pobjede: " + data);
+        }
+    });
+    console.log("POBJEDA, prosli smo ajax");
 }
 
 function gameOver()
