@@ -11,21 +11,23 @@ function pokreni_križić_kružić() {
     $("#name_of_the_game").html('Križić-kružić');
     $("won").html('');
 
+    var clicked = false;
+
     // ako je kliknut gumb X, igrač je odabrao x
     $("#x").on("click", function() {
         choice = 0;
+        pokreni_križić_kružić_nastavi();
     });
 
     // ako je kliknut gumb O, igrač je odabrao o
     $("#o").on("click", function() {
         choice = 1;
+        pokreni_križić_kružić_nastavi();
     });
 
-    while( document.getElementById('x').clicked === false && document.getElementById('o').clicked === false ) {
-        // pričekaj klik
-        continue;
-    }
+}
 
+function pokreni_križić_kružić_nastavi() {
     $("#middle").html('<h1 id="name_of_the_game"></h1><canvas id="cnv"></canvas>' +
         '<br> <br><button id="again">Hoću sve ispočetka!</button><div id="game_id"></div><div id="won"></div></div>');
     
