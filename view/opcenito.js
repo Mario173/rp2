@@ -24,6 +24,7 @@ function iscrtaj_gore() {
     });
 
     $("#avatar").on("click", function() {
+        console.log('Here');
         curr_avatar = (curr_avatar + 1) % num_of_avatars;
         $("#avatar").attr('src', avatari[curr_avatar]); 
     });

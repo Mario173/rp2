@@ -24,3 +24,7 @@
 			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=logout">Logout</a></li>
 		</ul>
 	</nav>
+
+	<script>
+		$( document ).ready( iscrtaj_gore );
+	</script>
