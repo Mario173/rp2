@@ -336,17 +336,7 @@ class GameService {
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 	}
-
-	function addNewProduct($id_user, $name, $description, $price){
-		try
-		{
-			$db = DB::getConnection();
-			$st = $db->prepare( 'INSERT INTO dz2_products(id_user, name, description, price) VALUES(:id_user, :name, :description, :price)');
-			$st->execute( array( 'id_user' => $id_user, 'name' => $name, 'description' => $description, 'price' => $price ) );
-		}
-		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-	}
-
+	
 	function getAllGameIds(){
 		try
 		{
