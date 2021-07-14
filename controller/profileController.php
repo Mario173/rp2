@@ -10,10 +10,17 @@ class ProfileController extends BaseController
 		}
 		else if(isset($_SESSION['searched_user_id'])){
 			$user_id = $_SESSION['searched_user_id'];
+			if($_SESSION['searched_user_id'] === $_SESSION['logged_user_id']){
+				$avatar_privilege = "";
+			}
+			else{
+				$avatar_privilege = "_ne";
+			}
 			unset($_SESSION['searched_user_id']);
 		}
 		else{
 			$user_id = $_SESSION['logged_user_id'];
+			$avatar_privilege = "";
 		}
 		$gs = new GameService();
 
@@ -82,7 +89,7 @@ class ProfileController extends BaseController
 		}
 
 		$level_and_exp = $gs->getLevelAndPercentageFromUserId($user_id);
-		
+		$this->registry->template->avatar_privilege = $avatar_privilege;
 		$this->registry->template->avatar = $avatar;
 		$this->registry->template->level = $level_and_exp['level'];
 		$this->registry->template->percentage = $level_and_exp['percentage'];
