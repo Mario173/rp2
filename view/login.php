@@ -33,9 +33,11 @@ Lozinka:
 <br>
 <br>
 
-<form method="post" action="<?php echo  '/~marjamar/Projekt/view/registracija.php' ?>" >
+<form method="post" action="<?php echo  __SITE_URL . '/index.php?rt=registration/index' ?>" >
 <input type="submit" id="btnReg" name="btnRegister" value="Novi si? Registriraj se!" />
 </form>
+
+<?php if(  isset($_GET['poruka']) ) echo '<p>' . $_GET['poruka'] .'</p>'; ?>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>
 
