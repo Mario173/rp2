@@ -4,12 +4,13 @@
     <head>
         <title>Registracija</title>
         <meta charset="utf-8">
+	    <link rel="stylesheet" href="<?php echo __SITE_URL;?>/css/style.css">
     </head>
     <body>
 
-    <h1>Registracija na igre! :D</h1>
+    <h1>Registracija na igre! Dobrodošli!</h1>
 
-    <form method="post" action="<?php echo '/~vinkoben/Projekt/index.php?rt=registration/processRegistration'?>" >
+    <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=registration/processRegistration'; ?>" >
         <br>
         <br>
         <label for="user" id="label">Username</label>
@@ -36,7 +37,7 @@
     </form>
 
     <br><br>
-    <form method="post" action="<?php echo '/~vinkoben/Projekt/index.php'?>">
+    <form method="post" action="<?php echo __SITE_URL . '/index.php'?>">
     <input type="submit" value="vrati se na login"/>
     </form>
 

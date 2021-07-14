@@ -15,7 +15,7 @@
         <!-- inače priko neke skripte povuci -->
         <?php 
             foreach($high_scores as $high){
-                echo "<li><b>" . $high['name'] . "</b>" . " " . $high['high_score']  . " " . $high['date_achieved'] . "</li>";
+                echo "<li><b>" . $high['name'] . "</b>" . ": " . $high['high_score']  . ", achieved: " . $high['date_achieved'] . "</li>";
             }
         ?>
     </ul>
@@ -23,7 +23,7 @@
     <ul id="achievements">
         <?php 
             foreach($achievements_array as $achievement){
-                echo "<li><b>" . $achievement[0] . "</b>" . " " . $achievement[1] . "</li>";
+                echo "<li><b>" . $achievement[0] . "</b>" . ": " . $achievement[1] . "</li>";
             }
         ?>
         <!-- priko nekog .js file-a ili neke skripte povuci -->
@@ -34,7 +34,12 @@
     <ul id="reviews">
         <?php 
             foreach($reviews_array as $review){
-                echo "<li><b>" . $review[0] . "</b>" . " " . $review[1]  . " " . $review[2] . "</li>";
+                $content = "<li><b>" . $review[0] . "</b>" . ": ";
+                for($i = 0; $i < $review[1]; $i++) {
+                    $content .= '<i class="far fa-star"></i>';
+                }
+                $content .= " " . $review[2] . "</li>";
+                echo $content;
             }
         ?>
     </ul>

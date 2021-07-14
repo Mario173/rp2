@@ -29,7 +29,7 @@ function pokreni_vješala()
     // težinu bismo htjeli dobiti preko radio buttona
 /*
     $.ajax({
-        url: "/~vinkoben/Projekt/index.php?rt=igre/generiraj_vjesala",
+        url: document.location.pathname + "?rt=igre/generiraj_vjesala",
         type: "POST",
         data: {
             game: gameid
@@ -296,7 +296,7 @@ function pobjeda()
     ctx.strokeText("SCORE: "+score, 120, 130, 150);
 
     $.ajax({
-        url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
+        url: document.location.pathname + "?rt=igre/obradiRezultate",
         type: "POST",
         // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
         data: {

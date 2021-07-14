@@ -14,7 +14,7 @@ function suggest_names(){
         $.ajax(
         {   
             type: "POST",
-            url: "/~marjamar/Projekt/index.php?rt=search/search_help",
+            url: document.location.pathname + "?rt=search/search_help",
             data:
             {
                 q: unos
@@ -31,31 +31,6 @@ function suggest_names(){
                     console.log( "Greška prilikom Ajax poziva: " + status );
             }
         } );
-
-        /*$.ajax({
-            async: false,
-            type: "POST",
-            url: "controller/ajaxControllerHelp.php", // ovde je problem, ne znan kako nać ajaxControllerHelp.php
-            dataType: "json",
-            data: {
-                game: 'memory'
-            },
-            success: function( data ) {
-                console.log( data );
-                $("#game_id").html(data['id']);
-                nacrtaj_tablicu( data['table'] );
-            },
-            error: function( xhr, status, data ) {
-                console.log(JSON.stringify(data));
-                if( status != null ) {
-                    console.log('Ajax greška: ' + status);
-                }
-            }
-        });
-
-    } );
-
-    */
     }
     
     );

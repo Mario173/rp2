@@ -19,7 +19,7 @@ Korisničko ime:
 <br>
 
 
-Lozinka: 
+Lozinka:
 
 
 <input type="password"  name="password" value="" />
@@ -33,7 +33,7 @@ Lozinka:
 <br>
 <br>
 
-<form method="post" action="<?php echo  '/~vinkoben/Projekt/view/registracija.php' ?>" >
+<form method="post" action="<?php echo  '/~zecicmar/igre/igre/view/registracija.php'; ?>" >
 <input type="submit" id="btnReg" name="btnRegister" value="Novi si? Registriraj se!" />
 </form>
 

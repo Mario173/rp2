@@ -185,3 +185,8 @@ body div#bottom-right {
 #pokusaj, #provjeri {
     margin: 5px;
 }
+
+#bottom-left > h3 {
+    color: darkmagenta;
+    font: bolder;
+}

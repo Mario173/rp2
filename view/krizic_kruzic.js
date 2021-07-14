@@ -188,7 +188,7 @@ function ispiši_pobjedu( symbol ) {
         $("#won").html('Žao mi je, izgubili ste. :(');
     }
     $.ajax({
-        url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
+        url: document.location.pathname + "?rt=igre/obradiRezultate",
         type: "POST",
         // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
         data: {
