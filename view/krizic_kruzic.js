@@ -180,7 +180,7 @@ function ispiši_pobjedu( symbol ) {
     var player = choice ? 'o' : 'x';
     won = 1;
 
-    let score = ( 6 - broj_poteza ) * 400;
+    let score = ( 9 - broj_poteza ) * 500;
 
     if( symbol === player ) {
         $("#won").html('Čestitam, pobjeda!!!');
@@ -198,9 +198,10 @@ function ispiši_pobjedu( symbol ) {
         // datatype: "json",
         success: function(data){
             console.log("Kriz - kruz: uspio ajax upit za postavljanje score u highscore ");
-            console.log("data: "+ data + "data.type" + typeof(data) );
+            console.log("data: "+data + "data.type" + typeof(data) );
         },
         error: function(data){
+            console.log("score: " + score + " broj_poteza = " + broj_poteza +" ");
             console.log("greska u slanju ajax pobjede: " + data);
         }
     });

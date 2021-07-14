@@ -86,7 +86,6 @@ async function klikNaPloču() {
                 $("#won").html('Čestitam, pobjeda!!!');
                 // računanje bodova i to - ja sam mislio mozda gledamo omjer broja pogresnih otvaranja i minimalnog potrebnog
                 let score = ( (točne_kućice/2)/( broj_grešaka + 1 ) ) * 10000;
-                
                 // buduci je to igra gotova i pobjeda, saljemo serveru score ( i id igre ) ajaxom na obradu
                 $.ajax({
                     url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",

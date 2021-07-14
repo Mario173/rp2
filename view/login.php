@@ -2,12 +2,12 @@
 <html>
 <head>
 	<meta charset="utf8">
-	<title>ebuy</title>
+	<title>Igre</title>
 	<link rel="stylesheet" href="<?php echo __SITE_URL;?>/css/style.css">
 </head>
 <body>
 
-<h1>Prijavite se na ebuy</h1>
+<h1>Prijavite se na igre</h1>
 
 <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=login/processLogin'?>">
 
@@ -29,6 +29,12 @@ Lozinka:
 
 <input type="submit" id="btnSubmit" name="btnSubmit" value="Prijava" />
 
+</form>
+<br>
+<br>
+
+<form method="post" action="<?php echo  '/~vinkoben/Projekt/view/registracija.php' ?>" >
+<input type="submit" id="btnReg" name="btnRegister" value="Novi si? Registriraj se!" />
 </form>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>

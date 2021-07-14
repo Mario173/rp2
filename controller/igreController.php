@@ -220,6 +220,7 @@ class IgreController extends BaseController
 
 	public function obradiRezultate()
 	{
+		echo 'idemo obradit rezultate igre:    ';
 		// 
 		// $igre = array( "potapanje_brodova" => 1, "memory" => 2, "vjesala" => 3, "krizic_kruzic" => 4 );
 		// funkcija koja je najmjenjana obradi score-a kojeg je user postigao na kraju igre
@@ -235,11 +236,13 @@ class IgreController extends BaseController
 		// game treba biti u postu i prakticki uvijek i hoce
 		if( isset($_POST['game']) && isset($_POST['score']) )
 		{
+			echo 'postavljamo id i score ';
 			$gameid = $_POST['game'];
 			$score = $_POST['score'];
 		}
 		else
 		{
+			echo 'nismo postavili score i gameid ';
 			$this->sendJSONandExit("nisu poslani svi potrebni podaci");
 			//  ˇ there is no such thing as overkill 
 			return false;

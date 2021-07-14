@@ -384,6 +384,18 @@ class GameService {
 		return $arr;
 	}
 
+	function addNewUser($username, $email, $hash )
+	{
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'INSERT INTO project_users(id, username, password_hash, email, registration_sequence, 
+												has_registered, avatar_id, experience, level) 
+								VALUES(:id, :username, :hash, :email, ' . rand(1,10000) . ', 1,  0, 0, 1 );');
+			$st->execute( array( 'id' => NULL, 'username' => $username, 'hash' => $hash, 'email' => $email ) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
 
 
 
