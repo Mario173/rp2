@@ -7,6 +7,12 @@
         <img alt="Avatar" id="avatar" src="view/avatar.webp">
         <h1 id="username"><?php echo $username ?></h1>
     </div>
+    <div id = "level_and_exp">
+        <div class = "level"> <p>Level <?php echo $level ?></p> </div>
+        <div class="w3-light-grey" style = "width:100px;">
+            <div class="w3-blue" style= <?php echo "height:10px;width:" . $percentage . "%" ?>></div>
+        </div>
+    </div>
     <div id="games"></div>
 </div>
 <div id="bottom-left">
@@ -43,13 +49,6 @@
             }
         ?>
     </ul>
-</div>
-
-<div id = "level_and_exp">
-    <div class = "level"> <p><?php echo $level ?></p> </div>
-    <div class="w3-light-grey" style = "width:100px;">
-        <div class="w3-blue" style= <?php echo "height:10px;width:" . $percentage . "%" ?>></div>
-    </div>
 </div>
 
 <?php
