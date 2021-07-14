@@ -217,9 +217,3 @@ function resetiraj() {
     pokreni_križić_kružić();
 }
 
-function resetiraj() {
-    $("#won").html('');
-
-    pokreni_brodove();
-}
-

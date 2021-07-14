@@ -346,6 +346,3 @@ function resetirajBrodove() {
     pokreni_brodove();
 }
 
-    pokreni_brodove(); // opet pokreni sve ispočetka
-
-
