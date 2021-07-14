@@ -440,6 +440,8 @@ class GameService {
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 		return true;
+
+	}
 	function addExperience($id_user, $experience){
 		// Sad napokon možemo stvoriti novi loan (možda bi trebalo provjeriti i da ta knjiga nije već posuđena...)
 		try
@@ -458,8 +460,7 @@ class GameService {
 
 
 
-}
-
+	}
 
 
 ?>

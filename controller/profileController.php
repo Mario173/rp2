@@ -109,8 +109,8 @@ class ProfileController extends BaseController
 		// pogledaj jesu li u postu spremljeni ispravni podaci
 		if( !isset($_POST['avatar']) || !isset($_SESSION['logged_user_id']) )
 		{
-			
-			$this->sendJSONandExit("nisu poslani potrebni podaci");
+			//$this->sendJSONandExit("nisu poslani potrebni podaci");
+			return false;
 		}
 		else{
 			$avatar = $_POST['avatar'];
@@ -122,14 +122,14 @@ class ProfileController extends BaseController
 		}
 		else
 		{
-			$this->sendJSONandExit("netko drugi klika na ikonu avatara");
+			//$this->sendJSONandExit("netko drugi klika na ikonu avatara");
 			return false;
 		}
-		echo 'Avatar je: ' . $avatar;
+		//echo 'Avatar je: ' . $avatar;
 		$GS = new GameService();
 		// sad ces moci promjeniti i svoj avatar klikanjem na tudi
 		$av = $GS->changeAvatarById( $id, $avatar );
-		echo 'Postavili smo avatara ' . $av . '  ';
+		//echo 'Postavili smo avatara ' . $av . '  ';
 		$msg['avatar'] = $avatar;
 		$this->sendJSONandExit($msg);
 	}
