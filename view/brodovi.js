@@ -318,12 +318,13 @@ function provjeri() {
         $("#won").html('Čestitam, pobjeda!!');
         // ovdje ide dodavanje bodova useru
         let score = 10000 / broj_provjera;
+        console.log(document.location.pathname);
         $.ajax({
             url: document.location.pathname + "?rt=igre/obradiRezultate",
             type: "POST",
             // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
             data: {
-                game: gameid,
+                game: 1,
                 score: score
             },
             // datatype: "json",
