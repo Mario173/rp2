@@ -10,7 +10,7 @@
 
     <h1>Registracija na igre! Dobrodošli!</h1>
 
-    <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=registration/processRegistration'; ?>" >
+    <form method="post" action="<?php echo __SITE_URL . '/index.php?rt=registration/processRegistration'?>" >
         <br>
         <br>
         <label for="user" id="label">Username</label>

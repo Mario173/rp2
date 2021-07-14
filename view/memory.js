@@ -92,7 +92,7 @@ async function klikNaPloču() {
                     type: "POST",
                     // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
                     data: {
-                        game: gameid,
+                        game: 2,
                         score: score
                     },
                     // datatype: "json",

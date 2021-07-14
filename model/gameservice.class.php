@@ -317,6 +317,7 @@ class GameService {
 		// Sad napokon možemo stvoriti novi loan (možda bi trebalo provjeriti i da ta knjiga nije već posuđena...)
 		try
 		{
+			echo 'Here: ' . $id_game . ' ' . $id_user . ' ' . $high_score;
 			$db = DB::getConnection();
 			$st = $db->prepare( 'UPDATE project_high_scores 
 									SET high_score = :high_score, date_achieved = CURRENT_DATE() 

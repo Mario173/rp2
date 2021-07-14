@@ -27,15 +27,15 @@ function pokreni_vješala()
 
     napravi_review_div();
     // težinu bismo htjeli dobiti preko radio buttona
-/*
+
     $.ajax({
-        url: "/~marjamar/Projekt/index.php?rt=igre/generiraj_vjesala",
+        url: document.location.pathname + "?rt=igre/generiraj_vjesala",
         type: "POST",
         data: {
             game: gameid
         },
         sucess: function(data){
-            console.log("pocetak vjesala, igraxc: " + data["id"]);
+            console.log("pocetak vjesala, igrac: " + data["id"]);
             igrac = data["id"];
             rijec = data["rijec"];
 
@@ -49,7 +49,7 @@ function pokreni_vješala()
             console.log("VJESALA AJAX, error: " + data);
         }
     });
-*/
+
 
     // odaberi riječ preko ajaxa, ali ovdje za pocetak cemo random inace mozda napraviti fju za to tipa init rijec
     if( tezina === 1 )
@@ -294,23 +294,23 @@ function pobjeda()
     ctx.strokeText("POBJEDA!!!", 80, 80, 150);
     ctx.strokeStyle = "black";
     ctx.strokeText("SCORE: "+score, 120, 130, 150);
+    var currUrl = document.location.pathname + "?rt=igre/obradiRezultate";
 
     $.ajax({
-        url: document.location.pathname + "?rt=igre/obradiRezultate",
+        url: currUrl,
         type: "POST",
         // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
         data: {
             id: igrac,
-            game: gameid,
+            game: 3,
             score: score
         },
         // datatype: "json",
-        success: function(data){
+        success: function(){
             console.log("VJESALA: uspio ajax upit za postavljanje score u highscore|| ");
-            console.log("data: "+data + "data.type" + typeof(data) );
         },
-        error: function(data){
-            console.log("greska u slanju ajax pobjede: " + data);
+        error: function( xhr, status ){
+            console.log("greska u slanju ajax pobjede: " + status);
         }
     });
     console.log("POBJEDA, prosli smo ajax");

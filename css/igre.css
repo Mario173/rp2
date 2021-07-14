@@ -149,7 +149,7 @@ nav > ul > li > a {
 
 body div#bottom-left {
     width: 35%;
-    margin-left: 25%;
+    margin-left: 20%;
     display: inline-block;
 }
 
@@ -157,6 +157,17 @@ body div#bottom-right {
     width: 35%;
     display: inline-block;
     vertical-align: top;
+}
+
+#user, #level_and_exp {
+    display: inline-block;
+    vertical-align: top;
+    padding: 2%;
+}
+
+#top {
+    text-align: center;
+    width: 80%; 
 }
 
 .field_memory {

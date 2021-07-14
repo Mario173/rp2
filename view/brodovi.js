@@ -323,7 +323,7 @@ function provjeri() {
             type: "POST",
             // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
             data: {
-                game: gameid,
+                game: 1,
                 score: score
             },
             // datatype: "json",
