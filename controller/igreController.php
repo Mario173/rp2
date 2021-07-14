@@ -4,8 +4,17 @@ class IgreController extends BaseController
 {
 	public function index() 
 	{
+		if(!isset($_SESSION['logged_user_id'])){
+			header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
+			exit();
+		}
+		$gs = new GameService();
+		$this->registry->template->username = $gs->getUserById($_SESSION['logged_user_id'])->username;
+
 		$this->registry->template->show( 'igre' );
 	}
+
+	
 
 	public function sendJSONandExit( $message ) {
 		// Kao izlaz skripte pošalji $message u JSON formatu i prekini izvođenje.

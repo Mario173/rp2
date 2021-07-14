@@ -30,7 +30,7 @@ class RegistrationController extends BaseController
         if( !preg_match( '/^[a-zA-Z ,-.0-9]+$/', $username ) )
         {
             // stavio si nedozvoljen znak u username vrati se na pocetak registracije i po mogucnosti stavi u get[poruka] da je to problem
-            header( 'Location: /~vinkoben/Projekt/view/registracija.php?poruka=nedozvoljen_znak_u_username' );
+            header( 'Location: /~marjamar/Projekt/view/registracija.php?poruka=nedozvoljen_znak_u_username' );
             exit();
         }
         echo '<p>prosli smo pregmatch</p>';
@@ -39,7 +39,7 @@ class RegistrationController extends BaseController
             echo '<p>Unutar pregmatch</p>';
             // user nije dobro unio sifru dvaput, vrati ga na registration
             // da u get spremim jos ['poruka'] trebam dodat jos ?poruka="sifre nisu iste" poslije rt=registracija ili?
-            header( 'Location: /~vinkoben/Projekt/view/registracija.php?poruka=password_mora_oba_puta_biti_isti' );
+            header( 'Location: /~marjamar/Projekt/view/registracija.php?poruka=password_mora_oba_puta_biti_isti' );
             exit();
         }
         echo '<p>uzimamo usera iz baze po username</p>';

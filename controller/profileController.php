@@ -4,10 +4,17 @@ class ProfileController extends BaseController
 {
 	public function index() 
 	{
-		//$_SESSION['current_user_id'] = 1; //ovo zakomentirati kasnije
-
-		$user_id = $_SESSION['logged_user_id'];
-
+		if(!isset($_SESSION['logged_user_id'])){
+			header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
+			exit();
+		}
+		else if(isset($_SESSION['searched_user_id'])){
+			$user_id = $_SESSION['searched_user_id'];
+			unset($_SESSION['searched_user_id']);
+		}
+		else{
+			$user_id = $_SESSION['logged_user_id'];
+		}
 		$gs = new GameService();
 
 		$user = $gs->getUserById($user_id);
@@ -56,11 +63,16 @@ class ProfileController extends BaseController
 			$temp_el[1] = $el->date_achieved;
 			$achievements_array[] = $temp_el;
 		}
+
+		$level_and_exp = $gs->getLevelAndPercentageFromUserId($user_id);
 		
+		$this->registry->template->level = $level_and_exp['level'];
+		$this->registry->template->percentage = $level_and_exp['percentage'];
 		$this->registry->template->achievements_array = $achievements_array;
 		$this->registry->template->high_scores = $high_scores_array;
 		$this->registry->template->reviews_array = $reviews_array;
 		$this->registry->template->username = $username;
+
 
 		$this->registry->template->show( 'profile' );
 		

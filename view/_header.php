@@ -16,6 +16,8 @@
 <body>
 	<h1 id="main_title">Igre</h1>
 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<nav>
 		<ul>
 			<li><a href="<?php echo __SITE_URL; ?>/index.php?rt=profile">Profil</a></li>

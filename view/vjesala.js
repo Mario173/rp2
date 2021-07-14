@@ -29,7 +29,7 @@ function pokreni_vješala()
     // težinu bismo htjeli dobiti preko radio buttona
 /*
     $.ajax({
-        url: "/~vinkoben/Projekt/index.php?rt=igre/generiraj_vjesala",
+        url: "/~marjamar/Projekt/index.php?rt=igre/generiraj_vjesala",
         type: "POST",
         data: {
             game: gameid

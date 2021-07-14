@@ -34,7 +34,7 @@ class GameService {
 
 		$row = $st->fetch();
 		if( $row === false )
-			return null;
+			return false;
 		else
 			return new User( $row['id'], $row['username'], $row['password_hash'], $row['email'],
              $row['registration_sequence'], $row['has_registered'], $row['avatar_id'], $row['experience'],$row['level']);
@@ -259,8 +259,8 @@ class GameService {
 		try
 		{
 			$db = DB::getConnection();
-			$st = $db->query( "SELECT SELECT id, username, password_hash, email, registration_sequence, has_registered, experience, level
-                 FROM project_users WHERE username LIKE '%" . $name . "%' ORDER BY name ");
+			$st = $db->query( "SELECT id, username, password_hash, email, registration_sequence, has_registered, avatar_id, experience, level
+                 FROM project_users WHERE username LIKE '%" . $name . "%' ORDER BY username; ");
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
@@ -395,6 +395,35 @@ class GameService {
 			$st->execute( array( 'id' => NULL, 'username' => $username, 'hash' => $hash, 'email' => $email ) );
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	}
+
+	function getLevelAndPercentageFromUserId($id){
+		{
+			try
+			{
+				$db = DB::getConnection();
+				$st = $db->prepare( 'SELECT id, username, password_hash, email, registration_sequence, has_registered, avatar_id, experience, level
+					FROM project_users WHERE id=:id' );
+				$st->execute( array( 'id' => $id ) );
+			}
+			catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+	
+			$row = $st->fetch();
+			if( $row === false )
+				return null;
+			else{
+				$new_arr = array();
+				$experience = $row['experience'];
+				$level = round( $experience / 1000) + 1;
+				$percentage =  ($experience % 1000) / (float) 1000;
+				$percentage *= 100;
+				$new_arr['level'] = $level;
+				$new_arr['percentage'] = $percentage;
+				return $new_arr;
+		
+			}
+		}
+
 	}
 
 

@@ -145,6 +145,8 @@ nav > ul > li > a {
     font: 25px bolder;
 }
 
+
+
 body div#bottom-left {
     width: 35%;
     margin-left: 25%;
@@ -185,3 +187,4 @@ body div#bottom-right {
 #pokusaj, #provjeri {
     margin: 5px;
 }
+
