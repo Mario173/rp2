@@ -19,7 +19,7 @@ Korisničko ime:
 <br>
 
 
-Lozinka: 
+Lozinka:
 
 
 <input type="password"  name="password" value="" />

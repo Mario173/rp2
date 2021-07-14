@@ -1,0 +1,15 @@
+body {
+    margin-left: 35%;
+}
+
+#btnSubmit {
+    margin-left: 5%;
+}
+
+#btnSubmit, #btnReg {
+    color: white;
+    background-color: #0099CC;
+    border: solid 2px #0099CC;
+    border-radius: 5px;
+    text-transform: uppercase;
+}

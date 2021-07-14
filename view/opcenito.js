@@ -106,7 +106,7 @@ function iscrtaj_highscore(koji) {
     $.ajax(
         {   
             type: "POST",
-            url: "/~zecicmar/igre/igre/index.php?rt=igre/get_highscores",
+            url: document.location.pathname + "?rt=igre/get_highscores",
             data:
             {
                 id_game: koji,
@@ -137,7 +137,7 @@ function iscrtaj_reviews(koji){
     $.ajax(
         {   
             type: "POST",
-            url: "/~zecicmar/igre/igre/index.php?rt=igre/get_reviews",
+            url: document.location.pathname + "?rt=igre/get_reviews",
             data:
             {
                 id_game: koji,
@@ -172,7 +172,7 @@ function sendReview(){
         $.ajax(
             {   
                 type: "POST",
-                url: "/~zecicmar/igre/igre/index.php?rt=igre/review_game",
+                url: document.location.pathname + "?rt=igre/review_game",
                 data:
                 {
                     id_game: game_id,

@@ -29,7 +29,7 @@ function pokreni_memory() {
     $.ajax({
         async: false,
         type: "POST",
-        url: "/~zecicmar/igre/igre/index.php?rt=igre/generiraj_memory",
+        url: document.location.pathname + "?rt=igre/generiraj_memory",
         dataType: "json",
         data: {
             game: 'memory'
@@ -88,7 +88,7 @@ async function klikNaPloču() {
                 let score = ( (točne_kućice/2)/( broj_grešaka + 1 ) ) * 10000;
                 // buduci je to igra gotova i pobjeda, saljemo serveru score ( i id igre ) ajaxom na obradu
                 $.ajax({
-                    url: "/~marjamar/Projekt/index.php?rt=igre/obradiRezultate",
+                    url: document.location.pathname + "?rt=igre/obradiRezultate",
                     type: "POST",
                     // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
                     data: {

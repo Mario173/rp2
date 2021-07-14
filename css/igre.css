@@ -63,7 +63,7 @@ body {
     margin: 0;
 }
 
-#avatar {
+#avatar, #avatar_ne {
     border-radius: 50%;
     width: 75px;
     height: 75px;
@@ -188,3 +188,7 @@ body div#bottom-right {
     margin: 5px;
 }
 
+#bottom-left > h3 {
+    color: darkmagenta;
+    font: bolder;
+}

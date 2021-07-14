@@ -37,7 +37,7 @@ function pokreni_brodove() {
     $.ajax({
         async: false,
         type: "GET",
-        url: "/~zecicmar/igre/igre/index.php?rt=igre/generiraj_potapanje",
+        url: document.location.pathname + "?rt=igre/generiraj_potapanje",
         dataType: "json",
         success: function( data ) {
             $("#game_id").html(data['id']);
@@ -282,7 +282,7 @@ function provjeri() {
     $.ajax({
         async: false,
         type: "POST",
-        url: "/~zecicmar/igre/igre/index.php?rt=igre/provjeri_potapanje",
+        url: document.location.pathname + "?rt=igre/provjeri_potapanje",
         data: {
             //id: $("#game_id").text(),
             list: lista
@@ -319,7 +319,7 @@ function provjeri() {
         // ovdje ide dodavanje bodova useru
         let score = 10000 / broj_provjera;
         $.ajax({
-            url: "/~zecicmar/igre/igre/index.php?rt=igre/obradiRezultate",
+            url: document.location.pathname + "?rt=igre/obradiRezultate",
             type: "POST",
             // u igrac na pocetku spremamo id igraca dobiven preko ajaxa
             data: {
