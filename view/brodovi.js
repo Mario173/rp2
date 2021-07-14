@@ -289,18 +289,18 @@ function provjeri() {
         },
         dataType: 'json',
         success: function( data ) {
-            console.log(data);
+            data_list = data['list'];
             for(var i = 0; i < lista.length; i++) {
-                var j = parseInt(data[i]['row']) - 1;
-                var k = parseInt(data[i]['col']) - 1;
+                var j = parseInt(data_list[i]['row']) - 1;
+                var k = parseInt(data_list[i]['col']) - 1;
                 var which = "#" + j + k;
-                if( data[i]['answer'] === 'wrong' ) {
+                if( data_list[i]['answer'] === 'wrong' ) {
                     flag = 0; // ako pronađe ijedan krivi unos postavi zastavicu na 0
                     $(which).css("background-color", "red"); // promjeni pozadinu polja u crvenu
                 } else {
                     $(which).css("background-color", "white"); // inače promjeni boju pozadine u bijelu (u slučaju da je ranije bila kriva)
                 }
-                if(data[i]['type'] === 'ship') {
+                if(data_list[i]['type'] === 'ship') {
                     counter++; // povećaj brojač za 1 za svaki točno postavljen brod na koji naiđeš
                 }
             }
