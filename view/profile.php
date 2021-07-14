@@ -4,7 +4,7 @@
 
 <div id="top">
     <div id="user">
-        <img alt="Avatar" id="avatar" src="view/avatar.webp">
+        <img alt="Avatar" id="avatar" src=<?php echo $avatar ?> >
         <h1 id="username"><?php echo $username ?></h1>
     </div>
     <div id = "level_and_exp">

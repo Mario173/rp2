@@ -30,7 +30,7 @@
         <input type="text" name="mail" value="" id="mail" >
 
         <br><br>
-        <input type="submit" value="Registriraj se" />
+        <input type="submit" id="btnSubmit" value="Registriraj se" />
 
         <?php if(  isset($_GET['poruka']) ) echo '<p>' . $_GET['poruka'] .'</p>'; ?>
 
@@ -38,7 +38,7 @@
 
     <br><br>
     <form method="post" action="<?php echo __SITE_URL . '/index.php'?>">
-    <input type="submit" value="vrati se na login"/>
+    <input type="submit" id="btnSubmit" value="vrati se na login"/>
     </form>
 
     <br><br>

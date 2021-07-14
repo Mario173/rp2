@@ -21,6 +21,23 @@ class ProfileController extends BaseController
 
 		$username = $user->username;
 
+		// dobili smo avatar id iz baze sad trebamo obraditi taj id da se zna koju sliku povuci i koju postaviti u bazu
+		$avatar = $user->avatar_id;
+		switch ($avatar) {
+			case 1:
+				# code...
+				$avatar = 'view/avatar2.jpg';
+				break;
+			case 2:
+				$avatar = 'view/icon.png';
+				break;
+			default:
+				# code...
+				$avatar = 'view/avatar.webp';
+				break;
+		}
+		
+
 		$game_id_array = $gs->getAllGameIds();
 
 		$game_name_array = array();
@@ -66,6 +83,7 @@ class ProfileController extends BaseController
 
 		$level_and_exp = $gs->getLevelAndPercentageFromUserId($user_id);
 		
+		$this->registry->template->avatar = $avatar;
 		$this->registry->template->level = $level_and_exp['level'];
 		$this->registry->template->percentage = $level_and_exp['percentage'];
 		$this->registry->template->achievements_array = $achievements_array;
@@ -76,6 +94,44 @@ class ProfileController extends BaseController
 
 		$this->registry->template->show( 'profile' );
 		
+	}
+
+	public function sendJSONandExit( $message ) {
+		// Kao izlaz skripte pošalji $message u JSON formatu i prekini izvođenje.
+		header('Content-type:application/json;charset=utf-8');
+		echo json_encode( $message );
+		flush();
+		exit(0);
+	}
+
+	public function spremi_avatara()
+	{
+		// pogledaj jesu li u postu spremljeni ispravni podaci
+		if( !isset($_POST['avatar']) || !isset($_SESSION['logged_user_id']) )
+		{
+			
+			$this->sendJSONandExit("nisu poslani potrebni podaci");
+		}
+		else{
+			$avatar = $_POST['avatar'];
+			$id = $_SESSION['logged_user_id'];
+		}
+		if( !isset($_SESSION['searched_user_id'] ) )
+		{
+			
+		}
+		else
+		{
+			$this->sendJSONandExit("netko drugi klika na ikonu avatara");
+			return false;
+		}
+		echo 'Avatar je: ' . $avatar;
+		$GS = new GameService();
+		// sad ces moci promjeniti i svoj avatar klikanjem na tudi
+		$av = $GS->changeAvatarById( $id, $avatar );
+		echo 'Postavili smo avatara ' . $av . '  ';
+		$msg['avatar'] = $avatar;
+		$this->sendJSONandExit($msg);
 	}
 };
 

@@ -427,6 +427,21 @@ class GameService {
 
 	}
 
+	function changeAvatarById($id_user, $avatar)
+	{
+		// 
+		try
+		{
+			$db = DB::getConnection();
+			$st = $db->prepare( 'UPDATE project_users
+									SET avatar_id = :avatar_id 
+									WHERE id = :id ');
+			$st->execute( array('id' => $id_user, 'avatar_id' => $avatar) );
+		}
+		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
+		return true;
+	}
+
 
 
 

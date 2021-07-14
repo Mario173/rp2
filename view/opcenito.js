@@ -26,7 +26,28 @@ function iscrtaj_gore() {
     $("#avatar").on("click", function() {
         console.log('Here');
         curr_avatar = (curr_avatar + 1) % num_of_avatars;
-        $("#avatar").attr('src', avatari[curr_avatar]); 
+        // spremi trenutnog avatara u bazu
+        $.ajax({
+            url:  document.location.pathname + "?rt=profile/spremi_avatara",
+            data: {
+                avatar: curr_avatar
+            },
+            type: "POST",
+            success: function(data)
+            {
+                console.log('poslali smo: ' + curr_avatar );  
+                console.log("postavljen je avatar: " );
+                console.log( 'poslano je: ' + data );
+                // da samo user smije mjenjati avatara
+                $("#avatar").attr('src', avatari[ parseInt(data['avatar'] ) ] );
+            },
+            error: function( xhr, status)
+            {
+                if( status != null )
+                    console.log(status);
+            }
+        });
+         
     });
 
 }
