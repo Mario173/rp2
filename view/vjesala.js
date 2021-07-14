@@ -25,7 +25,7 @@ function pokreni_vješala()
     $("#name_of_the_game").html('Vješala');
     $("#won").html('');
 
-    //napravi_review_div -> ovo je samo bilo tu!!!
+    napravi_review_div();
     // težinu bismo htjeli dobiti preko radio buttona
 /*
     $.ajax({
