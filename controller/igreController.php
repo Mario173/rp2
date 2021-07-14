@@ -280,6 +280,8 @@ class IgreController extends BaseController
 			//sendJSONandExit("postavili smo novi highscore:" . $score . " za: " . $id);
 		}
 
+		$GS->addExperience($_SESSION['logged_user_id'], round($score / 10));
+
 		// sad idemo provjeriti koje sve achievmente moze dobiti za ovu igru i jesu li vec otkljucani
 		// koje achievmente ima user
 		//echo 'get Achievment by User ';

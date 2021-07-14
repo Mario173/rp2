@@ -149,7 +149,7 @@ function klikNaPločiBrodovi() {
             $(this).html('');
             break;
         case 1: // brod
-            $(this).html('<div class="ship"></div>');
+            $(this).html('<i class="fas fa-ship"></i>');
             break;
         case 2: // more
             $(this).html('<img alt="Sea" id="sea" src="view/wave.png">');
@@ -317,8 +317,7 @@ function provjeri() {
     if(flag === 1 && counter === 20) { // ako imamo točno 20 brodova i svi su na dobrim mjestima, pobjeda
         $("#won").html('Čestitam, pobjeda!!');
         // ovdje ide dodavanje bodova useru
-        let score = 10000 / broj_provjera;
-        console.log(document.location.pathname);
+        let score = round(10000 / broj_provjera);
         $.ajax({
             url: document.location.pathname + "?rt=igre/obradiRezultate",
             type: "POST",
