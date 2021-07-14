@@ -149,7 +149,7 @@ function klikNaPločiBrodovi() {
             $(this).html('');
             break;
         case 1: // brod
-            $(this).html('<div class="ship"></div>');
+            $(this).html('<i class="fas fa-ship"></i>');
             break;
         case 2: // more
             $(this).html('<img alt="Sea" id="sea" src="view/wave.png">');

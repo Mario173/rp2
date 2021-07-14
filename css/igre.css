@@ -17,11 +17,10 @@ td.nums {
     display: inline-block;
 }
 
-div.ship {
+i.fa-ship {
     width: 20px;
     height: 20px;
-    margin: 3px;
-    background-color: black;
+    text-align: center;
     display: inline-block;
 }
 div.one, div.two, div.three, div.four {
@@ -202,4 +201,9 @@ body div#bottom-right {
 #bottom-left > h3 {
     color: darkmagenta;
     font: bolder;
+}
+
+#search_div {
+    margin: 2%;
+    text-align: center;
 }
