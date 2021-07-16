@@ -21,6 +21,9 @@ function pokreni_brodove() {
     // postavi ime igre i, kako je igra tek krenula, postavi da igrač još nije pobjedio
     $("#name_of_the_game").html('Potapanje brodova');
     $("#won").html('');
+    // stvori slikice za brodove koje se nalaze desno od same tablice na kojoj se igra
+
+    create_ships();
     
 
     napravi_review_div();
@@ -28,10 +31,6 @@ function pokreni_brodove() {
 
     // varijabla koja ce brojati koliko puta smo slali poredak brodova na provjeru, ako je samo jednom trebas imati max score 10 000
     var broj_provjera = 0;
-
-    // stvori slikice za brodove koje se nalaze desno od same tablice na kojoj se igra
-
-    create_ships();
     
     // ajax poziv, služi za dohvaćanje podataka o tome gdje se nala brodovi i koji je id igre
     $.ajax({
