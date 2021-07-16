@@ -17,6 +17,14 @@ td.nums {
     display: inline-block;
 }
 
+.ship {
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    background-color: black;
+    display: inline-block;
+}
+
 i.fa-ship {
     width: 20px;
     height: 20px;
@@ -42,7 +50,7 @@ div.one, div.two, div.three, div.four {
 }
 
 #middle {
-    width: 40%;
+    width: 45%;
     height: 100%;
 }
 
@@ -60,6 +68,7 @@ body {
     background-color: midnightblue;
     color: white;
     margin: 0;
+    text-align: center;
 }
 
 #avatar, #avatar_ne {
