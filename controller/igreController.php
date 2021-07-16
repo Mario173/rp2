@@ -9,7 +9,20 @@ class IgreController extends BaseController
 			exit();
 		}
 		$gs = new GameService();
+		$avatar_id = $gs->getUserById($_SESSION['logged_user_id'])->avatar_id;
+
+		if($avatar_id == 0){
+			$avatar_src = 'view/avatar.webp';
+		}
+		else if($avatar_id == 1){
+			$avatar_src = 'view/avatar2.jpg';
+		}
+		else{
+			$avatar_src = 'view/icon.png';
+		}
+
 		$this->registry->template->username = $gs->getUserById($_SESSION['logged_user_id'])->username;
+		$this->registry->template->avatar_src = $avatar_src;
 
 		$this->registry->template->show( 'igre' );
 	}

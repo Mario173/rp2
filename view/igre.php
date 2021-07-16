@@ -4,7 +4,7 @@
 
 <div id="left">
     <div id="user">
-        <img alt="Avatar" id="avatar_ne" src="view/avatar.webp">
+        <img alt="Avatar" id="avatar_ne" src=<?php echo $avatar_src; ?>>
         <h1 id="username"><?php echo $username ?></h1>
     </div>
     <div id="games"></div>
