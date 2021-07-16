@@ -260,7 +260,7 @@ class GameService {
 		{
 			$db = DB::getConnection();
 			$st = $db->query( "SELECT id, username, password_hash, email, registration_sequence, has_registered, avatar_id, experience, level
-                 FROM project_users WHERE username LIKE '%" . $name . "%' ORDER BY username; ");
+                 FROM project_users WHERE username LIKE '" . $name . "%' ORDER BY username; ");
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
 
