@@ -85,7 +85,7 @@ async function klikNaPloču() {
             if( točne_kućice === 18 ) {
                 $("#won").html('Čestitam, pobjeda!!!');
                 // računanje bodova i to - ja sam mislio mozda gledamo omjer broja pogresnih otvaranja i minimalnog potrebnog
-                let score = round(( (točne_kućice/2)/( broj_grešaka + 1 ) ) * 10000);
+                let score = Math.round(( (točne_kućice/2)/( broj_grešaka + 1 ) ) * 10000);
                 // buduci je to igra gotova i pobjeda, saljemo serveru score ( i id igre ) ajaxom na obradu
                 $.ajax({
                     url: document.location.pathname + "?rt=igre/obradiRezultate",
