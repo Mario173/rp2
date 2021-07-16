@@ -316,7 +316,7 @@ function provjeri() {
     if(flag === 1 && counter === 20) { // ako imamo točno 20 brodova i svi su na dobrim mjestima, pobjeda
         $("#won").html('Čestitam, pobjeda!!');
         // ovdje ide dodavanje bodova useru
-        let score = Math.round(10000 / broj_provjera) * 20;
+        let score = Math.round(10000 / broj_provjera) * 40;
         $.ajax({
             url: document.location.pathname + "?rt=igre/obradiRezultate",
             type: "POST",

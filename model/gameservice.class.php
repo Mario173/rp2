@@ -405,7 +405,7 @@ class GameService {
 			else{
 				$new_arr = array();
 				$experience = $row['experience'];
-				$level = round( $experience / 1000) + 1;
+				$level = floor( $experience / 1000) + 1;
 				$percentage =  ($experience % 1000) / (float) 1000;
 				$percentage *= 100;
 				$new_arr['level'] = $level;
