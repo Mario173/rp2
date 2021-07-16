@@ -32,7 +32,7 @@
         <br><br>
         <input type="submit" id="btnSubmit" value="Registriraj se" />
 
-        <?php if(  isset($_GET['poruka']) ) echo '<p>' . $_GET['poruka'] .'</p>'; ?>
+        <?php if(  isset($_GET['poruka']) ) { $poruka = explode("_", $_GET['poruka']); echo '<p>'; foreach ($poruka as $x) echo $x.' '; echo '</p>'; } ?>
 
     </form>
 

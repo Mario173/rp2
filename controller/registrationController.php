@@ -33,38 +33,31 @@ class RegistrationController extends BaseController
         {
             $_GET['poruka'] = 'Nedozvoljen znak u Username';
             // stavio si nedozvoljen znak u username vrati se na pocetak registracije i po mogucnosti stavi u get[poruka] da je to problem
-            header( 'Location: ' .__SITE_URL . '/index.php?rt=registration/index?poruka=nedozvolje_znak_u_username' );
+            header( 'Location: ' .__SITE_URL . '/index.php?rt=registration/index&poruka=nedozvolje_znak_u_username' );
             exit();
         }
         echo '<p>prosli smo pregmatch</p>';
         if( $pass2 !== $password )
         {
-            echo '<p>Unutar provjere pass</p>';
-            $_GET['poruka'] = 'Password oba puta mora biti isti';
             // user nije dobro unio sifru dvaput, vrati ga na registration
             // da u get spremim jos ['poruka'] trebam dodat jos ?poruka="sifre nisu iste" poslije rt=registracija ili?
-            header( 'Location: ' .__SITE_URL . '/index.php?rt=registration/index?poruka=password_mora_oba_puta_biti_isti' );
+            header( 'Location: ' .__SITE_URL . '/index.php?rt=registration/index&poruka=password_mora_oba_puta_biti_isti' );
             exit();
         }
-        echo '<p>uzimamo usera iz baze po username</p>';
         //header( 'Location: ' . __SITE_URL . '/index.php?rt=igre' );
         $user = $gs->getUserByUsername( $username );
-        echo '<p>uezli smo ga iz baze</p>';
         if( $user !== false )
         {
-            $_GET['poruka'] = 'User vec postoji';
             // user vec postoji            +               ?poruka="taj user vec postoji"
-            header( 'Location: ' . __SITE_URL . '/index.php?rt=login?poruka=user_vec_postoji' . $user->username );
+            header( 'Location: ' . __SITE_URL . '/index.php?rt=registration/index&poruka=user:_'. $user->username .'_vec_postoji'  );
             exit();
         }
-        echo '<p>usera nema, treba stavit u bazu</p>';
         if( $user === false ){
             // header( 'Location: ' . __SITE_URL . '/index.php?rt=login' );
             // dakle nema tog usera, trebamo sad stvorit novog
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $gs->addNewUser($username, $email, $hash );
             // sad trebamo zapoceti session s njime, ujedno i provjera da addNewUser radi
-            $_GET['poruka'] = 'prosli smo addNewUser';
             $user = $gs->getUserByUsername( $username );
             if( isset($user) )
             {
