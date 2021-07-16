@@ -68,6 +68,7 @@ body {
     background-color: midnightblue;
     color: white;
     margin: 0;
+    text-align: center;
 }
 
 #avatar, #avatar_ne {
